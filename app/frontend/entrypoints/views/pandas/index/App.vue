@@ -4,6 +4,6 @@
 
 <template>
   <main>
-    <h1>pandas/index</h1>
+    <h1 class="text-2xl">MOAR PANDAS!!!</h1>
   </main>
 </template>

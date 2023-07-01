@@ -22,7 +22,6 @@ const mountApp = async (e) => {
       console.log("No root container found");
     }
   }
-
 };
 
 document.addEventListener("turbo:load", mountApp);

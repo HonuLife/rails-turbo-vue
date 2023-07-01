@@ -33,6 +33,7 @@ FileUtils.chdir APP_ROOT do
 
   puts "\n== Creating directory for capybara screenshots =="
   system! 'mkdir -p tmp/capybara'
+  system! 'mkdir -p tmp/screenshots'
 
   puts "\n== Starting application server =="
   system! 'bin/dev'

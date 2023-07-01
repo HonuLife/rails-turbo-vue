@@ -12,9 +12,9 @@
 
     <footer>
       <% if defined?(@typescript_entry_file) %>
-        <%= vite_typescript_tag "entrypoints/views/#{@typescript_entry_file}", defer: 'defer' %>
+        <%= vite_typescript_tag "entrypoints/views/#{@typescript_entry_file}" %>
       <% end %>
-      <%= vite_typescript_tag "turbo-vue", defer: 'defer' %>
+      <%= vite_typescript_tag "turbo-vue" %>
     </footer>
   </body>
 </html>
