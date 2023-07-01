@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="antialiased bg:white dark:bg-slate-800">
+<html class="antialiased bg:white dark:bg-slate-800" lang="en">
   <%= render "shared/head" %>
 
   <body class="font-sans font-normal leading-normal text-slate-800 dark:text-gray-50">
@@ -9,5 +9,12 @@
     <main class="px-4 lg:px-10">
       <%= content_for?(:content) ? yield(:content) : yield %>
     </main>
+
+    <footer>
+      <% if defined?(@typescript_entry_file) %>
+        <%= vite_typescript_tag "entrypoints/views/#{@typescript_entry_file}" %>
+      <% end %>
+      <%= vite_typescript_tag "turbo-vue" %>
+    </footer>
   </body>
 </html>

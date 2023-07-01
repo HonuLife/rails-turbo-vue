@@ -61,6 +61,7 @@ node_modules
 
 .yarn/
 .vscode/
+dump.rdb
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
