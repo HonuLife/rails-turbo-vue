@@ -2,17 +2,17 @@
 
 # Rails + Vue
 
-A starter for working with [Rails 7]([url](https://guides.rubyonrails.org/)) + [Vue 3]([url](https://vuejs.org/)).
+A starter for working with [Rails 7](https://guides.rubyonrails.org/) + [Vue 3](https://vuejs.org/).
 
 ## Features
 
 - ✅ Render parts of views on the clientside with [Vue.js]([url](https://vuejs.org/)) if you want.
 - ✅ TypeScript support
-- ✅ [TailwindCSS]([url](https://tailwindcss.com/))
-- ✅ [Vite]([url](https://vitejs.dev/)) for frontend assets via [Vite Ruby]([url](https://vite-ruby.netlify.app/))
+- ✅ [TailwindCSS](https://tailwindcss.com/)
+- ✅ [Vite](https://vitejs.dev/) for frontend assets via [Vite Ruby](https://vite-ruby.netlify.app/)
 - ✅ Navigation handled with [TurboDrive](https://turbo.hotwired.dev/handbook/drive)
 - ✅ System tests driven by [RSpec + Capybara + Playwright](https://playwright-ruby-client.vercel.app/docs/article/api_coverage)
-   - See [`spec/system/pandas/index_spec.rb`]([url](https://github.com/joekrump/rails-turbo-vue/blob/3f10a5a3cb48090e67ec937122c0fb464dc0d431/spec/system/pandas/index_spec.rb)) for an example
+   - See [`spec/system/pandas/index_spec.rb`](https://github.com/joekrump/rails-turbo-vue/blob/3f10a5a3cb48090e67ec937122c0fb464dc0d431/spec/system/pandas/index_spec.rb) for an example
 - ✅ Custom generator for creating a view that loads a Vue component
 
 ## Dev
