@@ -2,14 +2,16 @@
 
 # Rails + Vue
 
-A starter for working with Rails 7 + Vue 3, using Vite as the frontend build tool.
+A starter for working with Rails 7 + Vue 3. Vite is used for asset bundling and Rspec, Playwright and Vitest are used for testing.
 
 ## Features
 
 - ✅ Conditioanlly load Vue on pages
 - ✅ TypeScript support
+- ✅ Tailwind
 - ✅ Navigation handled with [TurboDrive](https://turbo.hotwired.dev/handbook/drive)
-- ✅ System tests driven by RSpec + Capybara + Playwright
+- ✅ System tests driven by [RSpec + Capybara + Playwright](https://playwright-ruby-client.vercel.app/docs/article/api_coverage)
+   - See [`spec/system/pandas/index_spec.rb`]([url](https://github.com/joekrump/rails-turbo-vue/blob/3f10a5a3cb48090e67ec937122c0fb464dc0d431/spec/system/pandas/index_spec.rb)) for an example
 - ✅ Custom generator for creating a view that loads a Vue component
 
 ## Dev
