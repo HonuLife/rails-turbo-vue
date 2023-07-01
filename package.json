@@ -3,7 +3,7 @@
   "dependencies": {
     "@hotwired/turbo-rails": "^7.3.0",
     "pinia": "^2.0.35",
-    "vue": "^3.2.47",
+    "vue": "^3.3.4",
     "vue-turbolinks": "^2.2.2"
   },
   "devDependencies": {
