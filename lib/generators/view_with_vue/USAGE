@@ -1,0 +1,12 @@
+Description:
+    Generates a Rails view and corresponding .vue file which gets mounted when the view is loaded.
+
+Example:
+    bin/rails generate view_with_vue show posts
+
+    This will create:
+        app/views/posts/show.html.erb
+        app/frontend/entrypoints/views/posts/show/App.vue
+        app/frontend/entrypoints/views/posts/show.ts
+        "/posts/:id, to: 'posts#show' in config/routes.rb"
+        a 'show' method in app/controllers/posts_controller.rb
