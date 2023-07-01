@@ -1,6 +1,11 @@
+const RootApp = async () =>
+  (await import("@/entrypoints/views/root/App.vue")).default;
+const PandasApp = async () =>
+  (await import("@/entrypoints/views/pandas/index/App.vue")).default;
+
 const routes = {
-  "/": "#root-view",
-  "/pandas": "#pandas-view",
+  "/": [["#root-view", RootApp]],
+  "/pandas": [["#pandas-view", PandasApp]],
 };
 
-export const getVueMountPoint = (url: string) => routes[url];
+export const getVueApps = (url: string) => routes[url];

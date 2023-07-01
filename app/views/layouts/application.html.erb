@@ -9,5 +9,12 @@
     <main class="px-4 lg:px-10">
       <%= content_for?(:content) ? yield(:content) : yield %>
     </main>
+
+    <footer>
+      <% if defined?(@typescript_entry_file) %>
+        <%= vite_typescript_tag "entrypoints/views/#{@typescript_entry_file}", defer: 'defer' %>
+      <% end %>
+      <%= vite_typescript_tag "turbo-vue", defer: 'defer' %>
+    </footer>
   </body>
 </html>
