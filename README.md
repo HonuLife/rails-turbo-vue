@@ -6,26 +6,41 @@ A starter for working with Rails 7 + Vue 3, using Vite as the frontend build too
 
 ## Features
 
+- ✅ Conditioanlly load Vue on pages
 - ✅ TypeScript support
-- ✅ Conditional loading of Vue on a per view basis.
 - ✅ Navigation handled with [TurboDrive](https://turbo.hotwired.dev/handbook/drive)
+- ✅ System tests driven by RSpec + Capybara + Playwright
+- ✅ Custom generator for creating a view that loads a Vue component
 
 ## Dev
 
 ### Setup
-```
+```bash
 bin/setup
 ```
 
 ### Run app:
 ```bash
-# requires overmind: https://github.com/DarthSim/overmind
-overmind start -f Procfile.dev
+bin/dev
 ```
 
 ### Run tests:
+
+#### Rails tests (including system/e2e tests)
+```bash
+rspec
 ```
-bin/rails -i test <path_to_test_file>
+
+#### Frontend (unit and component tests with Vitest)
+
+```bash
+yarn test
+```
+
+### Generate a view that uses a view component
+
+```bash
+rails generate view_with_vue NAME ROUTE_PATH
 ```
 
 ## Details
