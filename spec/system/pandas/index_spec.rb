@@ -19,7 +19,17 @@ RSpec.describe 'home page', type: :system do
       expect(actual_screenshot_path)
         .to match_screenshot(
           expected_screenshot_path(suffix: nil),
-          max_threshold_pct: 1.2
+          max_threshold_pct: 1.0
+        )
+
+      # Tet that the page looks correct in dark mode
+      page.emulate_media(colorScheme: 'dark')
+
+      page.screenshot(path: actual_screenshot_path(suffix: 'dark'))
+      expect(actual_screenshot_path(suffix: 'dark'))
+        .to match_screenshot(
+          expected_screenshot_path(suffix: 'dark'),
+          max_threshold_pct: 1.0
         )
     end
   end
