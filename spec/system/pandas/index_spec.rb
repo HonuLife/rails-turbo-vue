@@ -13,7 +13,8 @@ RSpec.describe 'home page', type: :system do
       page.wait_for_load_state
 
       header = page.wait_for_selector('h1')
-      expect(header.text_content).to eq('MOAR PANDAS!!!')
+      expect(header.text_content).to eq('Our Pandas')
+      expect(page.title).to eq('Pandas | Rails + Vue ⚡️')
 
       page.screenshot(path: actual_screenshot_path)
       expect(actual_screenshot_path)
@@ -25,7 +26,7 @@ RSpec.describe 'home page', type: :system do
 
       # Switch to customer prefers dark color scheme (aka dark mode)
       page.emulate_media(colorScheme: 'dark')
-      
+
       # Test that the page looks correct in dark mode
       page.screenshot(path: actual_screenshot_path(suffix: 'dark'))
       expect(actual_screenshot_path(suffix: 'dark'))
