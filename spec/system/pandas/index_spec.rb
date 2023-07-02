@@ -23,9 +23,10 @@ RSpec.describe 'home page', type: :system do
           # update: true # Uncomment this whenever you want to update the expected screenshot
         )
 
-      # Tet that the page looks correct in dark mode
+      # Switch to customer prefers dark color scheme (aka dark mode)
       page.emulate_media(colorScheme: 'dark')
-
+      
+      # Test that the page looks correct in dark mode
       page.screenshot(path: actual_screenshot_path(suffix: 'dark'))
       expect(actual_screenshot_path(suffix: 'dark'))
         .to match_screenshot(
