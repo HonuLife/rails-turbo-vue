@@ -1,3 +1,7 @@
+<%= content_for :page_title do %>
+  Pandas
+<% end %>
+
 <div class="max-w-lg mx-auto mt-16">
-  <div id="pandas-view"></div>
+  <div id="pandas-view" <%= add_vue_props(@data) %>></div>
 </div>
