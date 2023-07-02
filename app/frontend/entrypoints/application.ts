@@ -17,8 +17,3 @@
 // import.meta.globEager('./**/*_channel.js')
 //
 import "@hotwired/turbo-rails";
-
-// Example: Import a stylesheet in app/frontend/index.css
-// import '~/index.css'
-
-import "~/assets/stylesheets/application.tailwind.css";
