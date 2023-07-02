@@ -12,7 +12,8 @@ A starter for working with [Rails 7](https://guides.rubyonrails.org/) + [Vue 3](
 - ✅ [Vite](https://vitejs.dev/) for frontend assets via [Vite Ruby](https://vite-ruby.netlify.app/)
 - ✅ Navigation handled with [TurboDrive](https://turbo.hotwired.dev/handbook/drive)
 - ✅ System tests driven by [RSpec + Capybara + Playwright](https://playwright-ruby-client.vercel.app/docs/article/api_coverage)
-   - See [`spec/system/pandas/index_spec.rb`](https://github.com/joekrump/rails-turbo-vue/blob/3f10a5a3cb48090e67ec937122c0fb464dc0d431/spec/system/pandas/index_spec.rb) for an example
+   - [`spec/system/pandas/index_spec.rb`](https://github.com/joekrump/rails-turbo-vue/blob/main/spec/system/pandas/index_spec.rb) can be a helpful example.
+   - [ruby playwright page methods](https://github.com/YusukeIwaki/playwright-ruby-client/blob/7c4651e224977aa5b2e1837d7fb964c4957b34a9/lib/playwright/channel_owners/page.rb)
 - ✅ Custom generator for creating a view that loads a Vue component
 
 ## Dev

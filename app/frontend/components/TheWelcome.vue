@@ -94,12 +94,6 @@ import CommunityIcon from "./icons/IconCommunity.vue";
     <a
       class="text-teal-700 hover:text-teal-500 dark:text-teal-200"
       target="_blank"
-      href="https://pinia.vuejs.org/"
-      >Pinia</a
-    >,
-    <a
-      class="text-teal-700 hover:text-teal-500 dark:text-teal-200"
-      target="_blank"
       href="https://vitest.dev/"
       >Vitest</a
     >, and

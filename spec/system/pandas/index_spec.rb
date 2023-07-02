@@ -20,6 +20,7 @@ RSpec.describe 'home page', type: :system do
         .to match_screenshot(
           expected_screenshot_path(suffix: nil),
           max_threshold_pct: 1.0
+          # update: true # Uncomment this whenever you want to update the expected screenshot
         )
 
       # Tet that the page looks correct in dark mode
