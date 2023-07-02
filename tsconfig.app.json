@@ -9,9 +9,7 @@
     "app/frontend/**/__tests__/*"
   ],
   "compilerOptions": {
-    "moduleResolution": "nodenext",
-    "module": "ESNext",
-    "strict": true,
+    "moduleResolution": "node",
     "target": "esnext",
     "composite": true,
     "baseUrl": ".",
