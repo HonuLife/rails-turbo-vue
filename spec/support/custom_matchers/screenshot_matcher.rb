@@ -84,7 +84,7 @@ end
 
 RSpec::Matchers.define :match_screenshot do |expected_screenshot_path, max_threshold_pct: 0, update: false|
   match do |actual_screenshot_path|
-    page.save_screenshot(expected_screenshot_path) if update
+    page.save_screenshot(expected_screenshot_path) if update || !File.exist?(expected_screenshot_path)
 
     @matcher = ScreenshotMatcher.new(
       actual_screenshot_path.to_s,
