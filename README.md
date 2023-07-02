@@ -13,6 +13,7 @@ A starter for working with [Rails 7](https://guides.rubyonrails.org/) + [Vue 3](
 - ✅ Navigation handled with [TurboDrive](https://turbo.hotwired.dev/handbook/drive)
 - ✅ System tests driven by [RSpec + Capybara + Playwright](https://playwright-ruby-client.vercel.app/docs/article/api_coverage)
    - [`spec/system/pandas/index_spec.rb`](https://github.com/joekrump/rails-turbo-vue/blob/main/spec/system/pandas/index_spec.rb) can be a helpful example.
+   - [ruby playwright page methods](https://github.com/YusukeIwaki/playwright-ruby-client/blob/7c4651e224977aa5b2e1837d7fb964c4957b34a9/lib/playwright/channel_owners/page.rb)
 - ✅ Custom generator for creating a view that loads a Vue component
 
 ## Dev
