@@ -1,9 +1,9 @@
 import { getVueComponents } from "@/helpers/routes";
-import { createApp } from "vue";
+import { createApp, type App, type Component } from "vue";
 
-let components = [];
+let components: App[] = [];
 
-const mountApp = async (e) => {
+const mountApp = async (e: Event) => {
   const vueComponentsForPage = getVueComponents(window.location.pathname);
   let app;
 
@@ -12,14 +12,14 @@ const mountApp = async (e) => {
   }
 
   for (const [rootContainer, component] of vueComponentsForPage) {
-    if (e.currentTarget.querySelector(rootContainer) !== null) {
-      component().then((c) => {
+    if ((e.currentTarget as Document)?.querySelector(rootContainer) !== null) {
+      component().then((c: Component) => {
         app = createApp(c);
         components.push(app);
         app.mount(rootContainer);
       });
     } else {
-      console.log("No root container found");
+      console.error("No container found for Vue component");
     }
   }
 };
