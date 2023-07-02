@@ -8,4 +8,4 @@ const routes = {
   "/pandas": [["#pandas-view", PandasApp]],
 };
 
-export const getVueApps = (url: string) => routes[url];
+export const getVueComponents = (url: string) => routes[url];

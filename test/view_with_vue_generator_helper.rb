@@ -2,7 +2,7 @@ ROOT_PATH = File.expand_path('../', __dir__)
 
 module ViewWithVueGeneratorHelper
   def app_template_path
-    "#{ROOT_PATH}/test/lib/generators/templates/config"
+    "#{ROOT_PATH}/test/lib/generators/templates/rails_app"
   end
 
   def tmp_path(*args)
@@ -23,7 +23,7 @@ module ViewWithVueGeneratorHelper
     FileUtils.rm_rf(app_path)
     FileUtils.mkdir_p(app_path)
     puts "Creating a new Rails app in #{app_path}", '✅'
-    FileUtils.cp_r(app_template_path, app_path)
+    FileUtils.cp_r(Dir.glob("#{app_template_path}/*"), app_path)
   end
 
   def teardown_app
