@@ -1,21 +1,21 @@
-import { getVueApps } from "@/helpers/route-helper";
+import { getVueComponents } from "@/helpers/routes";
 import { createApp } from "vue";
 
-let apps = [];
+let components = [];
 
 const mountApp = async (e) => {
-  const vueAppsForPage = getVueApps(window.location.pathname);
+  const vueComponentsForPage = getVueComponents(window.location.pathname);
   let app;
 
-  if (vueAppsForPage === undefined) {
+  if (vueComponentsForPage === undefined) {
     return;
   }
 
-  for (const [rootContainer, component] of vueAppsForPage) {
+  for (const [rootContainer, component] of vueComponentsForPage) {
     if (e.currentTarget.querySelector(rootContainer) !== null) {
       component().then((c) => {
         app = createApp(c);
-        apps.push(app);
+        components.push(app);
         app.mount(rootContainer);
       });
     } else {
@@ -27,11 +27,11 @@ const mountApp = async (e) => {
 document.addEventListener("turbo:load", mountApp);
 
 document.addEventListener("turbo:visit", () => {
-  if (apps.length > 0) {
-    apps.forEach((app) => {
+  if (components.length > 0) {
+    components.forEach((app) => {
       app.unmount();
     });
 
-    apps = [];
+    components = [];
   }
 });
