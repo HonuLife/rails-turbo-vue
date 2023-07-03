@@ -4,9 +4,9 @@
       <slot name="icon"></slot>
     </i>
     <div class="details">
-      <h3>
+      <h2 class="font-bold text-xl mb-3">
         <slot name="heading"></slot>
-      </h3>
+      </h2>
       <slot></slot>
     </div>
   </div>
@@ -29,12 +29,6 @@ i {
   place-content: center;
   width: 32px;
   height: 32px;
-}
-
-h3 {
-  font-size: 1.2rem;
-  font-weight: 500;
-  margin-bottom: 0.4rem;
 }
 
 @media (min-width: 1024px) {
