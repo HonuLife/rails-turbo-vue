@@ -9,4 +9,11 @@ module.exports = {
     "@vue/eslint-config-typescript/recommended",
     "@vue/eslint-config-prettier",
   ],
+  rules: {
+    "no-unused-vars": ["error", { vars: "all", argsIgnorePattern: "^_" }],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { vars: "all", argsIgnorePattern: "^_" },
+    ],
+  },
 };
