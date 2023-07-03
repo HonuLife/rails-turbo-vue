@@ -27,12 +27,12 @@
         TailwindCSS</a
       >,
       <a
-        class="font-semibold text-yellow-600 bg-gray-800 dark:text-yellow-400 hover:text-yellow-800 dark:hover:text-yellow-200"
+        class="font-semibold text-yellow-600 dark:text-yellow-400 hover:text-yellow-800 dark:hover:text-yellow-200"
         target="_blank"
         href="https://vite-ruby.netlify.app/"
       >
-        Vite Ruby
-      </a>
+        Vite Ruby</a
+      >
       and
       <a
         class="font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200"
