@@ -15,17 +15,7 @@ import CommunityIcon from "./icons/IconCommunity.vue";
 
     <ul class="list-inside list-disc">
       <li>
-        Vue’s
-        <a
-          class="text-teal-700 hover:text-teal-500 dark:text-teal-200"
-          target="_blank"
-          href="https://vuejs.org/"
-          >official documentation</a
-        >
-        provides you with all information you need to get started.
-      </li>
-      <li>
-        Ruby on Rails'
+        Ruby on Rails
         <a
           class="text-teal-700 hover:text-teal-500 dark:text-teal-200"
           target="_blank"
@@ -34,7 +24,16 @@ import CommunityIcon from "./icons/IconCommunity.vue";
         >
       </li>
       <li>
-        TailwindCSS'
+        Vue
+        <a
+          class="text-teal-700 hover:text-teal-500 dark:text-teal-200"
+          target="_blank"
+          href="https://vuejs.org/"
+          >official documentation</a
+        >
+      </li>
+      <li>
+        TailwindCSS
         <a
           class="text-teal-700 hover:text-teal-500 dark:text-teal-200"
           target="_blank"
@@ -43,11 +42,20 @@ import CommunityIcon from "./icons/IconCommunity.vue";
         >
       </li>
       <li>
-        Vite Ruby's
+        Vite Ruby
         <a
           class="text-teal-700 hover:text-teal-500 dark:text-teal-200"
           target="_blank"
           href="https://vite-ruby.netlify.app/"
+          >official documentation.</a
+        >
+      </li>
+      <li>
+        Playwright Ruby API
+        <a
+          class="text-teal-700 hover:text-teal-500 dark:text-teal-200"
+          target="_blank"
+          href="https://playwright-ruby-client.vercel.app/docs/api/page"
           >official documentation.</a
         >
       </li>
@@ -60,12 +68,19 @@ import CommunityIcon from "./icons/IconCommunity.vue";
     </template>
     <template #heading>Tooling</template>
 
-    This project is served and bundled with
+    This project is served in dev and bundled with
     <a
       class="text-teal-700 hover:text-teal-500 dark:text-teal-200"
       href="https://vitejs.dev/guide/features.html"
       target="_blank"
       >Vite</a
+    >
+    via
+    <a
+      class="text-teal-700 hover:text-teal-500 dark:text-teal-200"
+      href="https://vite-ruby.netlify.app/"
+      target="_blank"
+      >Vite Ruby</a
     >. The recommended IDE setup is
     <a
       class="text-teal-700 hover:text-teal-500 dark:text-teal-200"
@@ -80,8 +95,6 @@ import CommunityIcon from "./icons/IconCommunity.vue";
       target="_blank"
       >Volar</a
     >.
-
-    <br />
   </WelcomeItem>
 
   <WelcomeItem>
@@ -90,6 +103,30 @@ import CommunityIcon from "./icons/IconCommunity.vue";
     </template>
     <template #heading>Ecosystem</template>
 
+    <h3 class="text-lg mt-2 font-semibold">Rails</h3>
+
+    Find docs on
+    <a
+      class="text-teal-700 hover:text-teal-500 dark:text-teal-200"
+      target="_blank"
+      href="https://chat.vuejs.org"
+    >
+      testing with RSpec</a
+    >
+    , and
+    <a
+      href="https://playwright-ruby-client.vercel.app/docs/api/pages/"
+      target="_blank"
+      >Playwright Ruby</a
+    >. To set up authentication checkout the
+    <a
+      class="text-teal-700 hover:text-teal-500 dark:text-teal-200"
+      href="https://github.com/heartcombo/devise/wiki"
+      target="_blank"
+      >Devise Wiki</a
+    >.
+
+    <h3 class="text-lg mt-2 font-semibold">Vue</h3>
     Get official tools and libraries for your project:
     <a
       class="text-teal-700 hover:text-teal-500 dark:text-teal-200"
@@ -102,7 +139,7 @@ import CommunityIcon from "./icons/IconCommunity.vue";
       target="_blank"
       href="https://github.com/vuejs/devtools"
       >Vue Dev Tools</a
-    >. If you need more resources, we suggest paying
+    >. If you need more resources, give
     <a
       class="text-teal-700 hover:text-teal-500 dark:text-teal-200"
       target="_blank"
@@ -118,7 +155,28 @@ import CommunityIcon from "./icons/IconCommunity.vue";
     </template>
     <template #heading>Community</template>
 
-    <h3 class="text-lg mt-2">Vue</h3>
+    <h3 class="text-lg mt-2 font-semibold">Rails</h3>
+    Ask your questions on
+    <a
+      class="text-teal-700 hover:text-teal-500 dark:text-teal-200"
+      target="_blank"
+      href="https://discuss.rubyonrails.org"
+      >Discourse</a
+    >, the official Rails forums, or
+    <a
+      class="text-teal-700 hover:text-teal-500 dark:text-teal-200"
+      target="_blank"
+      href="https://stackoverflow.com/questions/tagged/rails"
+      >StackOverflow</a
+    >. You can also check out
+    <a
+      class="text-teal-700 hover:text-teal-500 dark:text-teal-200"
+      href="https://gorails.com/"
+      >GoRails</a
+    >
+    for screencasts and tutorials.
+
+    <h3 class="text-lg mt-2 font-semibold">Vue</h3>
     Ask your question on
     <a
       class="text-teal-700 hover:text-teal-500 dark:text-teal-200"
@@ -146,25 +204,5 @@ import CommunityIcon from "./icons/IconCommunity.vue";
       >@vuejs</a
     >
     twitter account for latest news in the Vue world.
-    <h3 class="text-lg mt-2">Rails</h3>
-    Ask your questions on
-    <a
-      class="text-teal-700 hover:text-teal-500 dark:text-teal-200"
-      target="_blank"
-      href="https://discuss.rubyonrails.org"
-      >Discourse</a
-    >, the official Rails forums, or
-    <a
-      class="text-teal-700 hover:text-teal-500 dark:text-teal-200"
-      target="_blank"
-      href="https://stackoverflow.com/questions/tagged/rails"
-      >StackOverflow</a
-    >. You can also check out
-    <a
-      class="text-teal-700 hover:text-teal-500 dark:text-teal-200"
-      href="https://gorails.com/"
-      >GoRails</a
-    >
-    for screencasts and tutorials.
   </WelcomeItem>
 </template>
