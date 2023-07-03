@@ -80,7 +80,14 @@ function handleDynamicImportFailure() {
     localStorage.setItem("dynamic import failed count", count + 1);
     setTimeout(() => window.location.reload(), 500);
   } else {
+    console.error(`Dynamic import failed 3 times on ${window.location.href}. Redirecting home.`);
     localStorage.removeItem("dynamic import failed count");
-    alert("Failed to load page after 3 attempts try refreshing the page.");
+
+    if (typeof Turbo !== "undefined") {
+      Turbo.cache.clear();
+      Turbo.visit(window.location.origin);
+    } else {
+      window.location.href = window.location.origin;
+    }
   }
 }
