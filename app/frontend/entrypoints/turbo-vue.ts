@@ -5,8 +5,8 @@ let components: App[] = [];
 
 const mountApp = async (e: Event) => {
   const vueComponentsForPage = getVueComponents(window.location.pathname);
-  let app;
-  let nodeToMountOn;
+  let app: App;
+  let nodeToMountOn: HTMLElement;
   let props = {};
 
   if (vueComponentsForPage === undefined) {
@@ -23,6 +23,17 @@ const mountApp = async (e: Event) => {
           app = createApp(c, props ? JSON.parse(props) : undefined);
           components.push(app);
           app.mount(rootContainer);
+          localStorage.removeItem("dynamic import failed count");
+        })
+        .catch((error: Error) => {
+          if (
+            error instanceof TypeError &&
+            error.message.includes("dynamically imported module")
+          ) {
+            handleDynamicImportFailure();
+          } else {
+            console.error(error);
+          }
         })
         .finally(() => {
           clearInitialPropsFromDOM(nodeToMountOn);
@@ -47,4 +58,27 @@ document.addEventListener("turbo:visit", () => {
 
 function clearInitialPropsFromDOM(element: HTMLElement) {
   element.removeAttribute("data-props");
+}
+
+function handleDynamicImportFailure() {
+  const savedCount = localStorage.getItem("dynamic import failed count");
+  const count = savedCount ? parseInt(savedCount, 10) : 0;
+
+  if (count < 3 && count === 0) {
+    localStorage.setItem("dynamic import failed count", count + 1);
+    window.location.reload();
+  } else if (count < 3 && count > 0) {
+    localStorage.setItem("dynamic import failed count", count + 1);
+    setTimeout(() => window.location.reload(), 500);
+  } else {
+    console.error(`Dynamic import failed 3 times on ${window.location.href}. Redirecting home.`);
+    localStorage.removeItem("dynamic import failed count");
+
+    if (typeof Turbo !== "undefined") {
+      Turbo.cache.clear();
+      Turbo.visit(window.location.origin);
+    } else {
+      window.location.href = window.location.origin;
+    }
+  }
 }
