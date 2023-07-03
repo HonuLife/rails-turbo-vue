@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps({
   pandas: {
-    type: Array<{ name: string; age: string }>,
+    type: Array<{ name: string; age_years: string }>,
     required: true,
   },
 });
@@ -13,7 +13,7 @@ defineProps({
 
     <ul v-if="pandas.length > 0">
       <li v-for="panda in pandas" :key="panda.name">
-        {{ panda.name }} is {{ panda.age }} years old
+        {{ panda.name }} is {{ panda.age_years }} years old
       </li>
     </ul>
     <div v-else>

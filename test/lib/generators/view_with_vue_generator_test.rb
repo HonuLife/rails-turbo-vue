@@ -29,7 +29,7 @@ class ViewWithVueGeneratorTest < Rails::Generators::TestCase
       end
 
       expected_view_content = <<~HTML
-        <div class="max-w-lg mx-auto mt-16">
+        <div class="max-w-screen-lg mx-auto mt-16">
           <div id="vue-root"></div>
         </div>
       HTML

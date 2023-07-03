@@ -1,7 +1,10 @@
 <header class="sticky top-0">
-  <nav class="flex flex-wrap items-center justify-between px-3 py-3 bg-gray-100 lg:px-10 dark:bg-slate-900">
+  <nav class="flex flex-wrap justify-between items-center px-3 py-3 bg-gray-100 lg:px-10 dark:bg-slate-900">
     <%= link_to "Rails + Vue", root_path, class: "text-2xl font-bold text-gray-900 dark:text-green-600 dark:hover:text-green-200" %>
 
-    <%= link_to "Pandas", pandas_path, class: "text-xl font-bold text-purple-600 dark:text-purple-400" %>
+    <div class="flex-grow flex justify-end gap-2">
+      <%= link_to "Pandas", pandas_animals_path, class: "text-xl font-bold text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-200" %>
+      <%= link_to "Animals", animals_path, class: "text-xl font-bold text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-200"%>
+    </div>
   </nav>
 </header>

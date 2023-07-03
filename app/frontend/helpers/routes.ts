@@ -5,7 +5,7 @@ const PandasApp = async () =>
 
 const routes = {
   "/": [["#root-view", RootApp]],
-  "/pandas": [["#pandas-view", PandasApp]],
+  "/animals/pandas": [["#pandas-view", PandasApp]],
 };
 
 export const getVueComponents = (url: string) => {
@@ -16,5 +16,5 @@ export const getVueComponents = (url: string) => {
     url = result[2] ? `/${result[1]}/:id${result[2]}` : `/${result[1]}/:id`;
   }
 
-  return routes[url];
+  return routes[url] ?? [];
 };

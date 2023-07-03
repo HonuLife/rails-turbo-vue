@@ -3,8 +3,8 @@
   <%= render "shared/head" %>
 
   <body class="font-sans font-normal leading-normal text-slate-800 dark:text-gray-50">
-    <%= render "shared/flash_notice" %>
     <%= render "shared/header" %>
+    <%= render "shared/flash_notice" %>
 
     <main class="px-4 lg:px-10">
       <%= content_for?(:content) ? yield(:content) : yield %>
