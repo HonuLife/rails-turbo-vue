@@ -1,0 +1,10 @@
+<div class="max-w-screen-lg mx-auto mt-16">
+  <%= render @animal %>
+
+  <div>
+    <%= link_to "Edit this animal", edit_animal_path(@animal) %> |
+    <%= link_to "Back to animals", animals_path %>
+
+    <%= button_to "Delete", @animal, method: :delete, class: "shadow bg-red-500 hover:bg-red-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded cursor-pointer" %>
+  </div>
+</div>

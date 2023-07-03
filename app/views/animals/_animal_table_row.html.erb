@@ -1,0 +1,8 @@
+<tr id="<%= dom_id animal %>">
+  <td class="px-6 py-4 text-center"><%= animal.name %></td>
+  <td class="px-6 py-4 text-center"><%= animal.age_years %></td>
+  <td class="px-6 py-4 text-center"><%= animal.type %></td>
+  <td class="px-6 py-4 text-right">
+    <%= link_to "Details", animal, class: "mt-4 text-purple-400 hover:text-purple-200" %>
+  </td>
+</tr>

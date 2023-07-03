@@ -1,0 +1,22 @@
+<div class="max-w-screen-lg mx-auto mt-16">
+  <h1 class="text-2xl mb-3">Animals</h1>
+
+  <%= link_to "New animal", new_animal_path, class: "mt-4 text-purple-400 hover:text-purple-200" %>
+
+  <table id="animals" class="relative w-full border mt-4">
+    <thead>
+      <tr>
+        <th class="sticky top-0 px-6 py-3 text-purple-900 bg-purple-300">Name</th>
+        <th class="sticky top-0 px-6 py-3 text-purple-900 bg-purple-300">Age</th>
+        <th class="sticky top-0 px-6 py-3 text-purple-900 bg-purple-300">Type</th>
+        <th class="sticky top-0 px-6 py-3 text-purple-900 bg-purple-300">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y bg-purple-100 dark:bg-purple-700">
+      <% @animals.each do |animal| %>
+        <%= render partial: "animal_table_row", locals: { animal: animal } %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
