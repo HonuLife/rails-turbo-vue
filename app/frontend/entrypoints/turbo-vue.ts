@@ -23,15 +23,14 @@ const mountApp = async (e: Event) => {
           app = createApp(c, props ? JSON.parse(props) : undefined);
           components.push(app);
           app.mount(rootContainer);
+          localStorage.removeItem("dynamic import failed count");
         })
         .catch((error: Error) => {
           if (
             error instanceof TypeError &&
-            error.message.startsWith(
-              "Failed to fetch dynamically imported module:"
-            )
+            error.message.includes("dynamically imported module")
           ) {
-            window.location.reload();
+            handleDynamicImportFailure();
           } else {
             console.error(error);
           }
@@ -59,4 +58,20 @@ document.addEventListener("turbo:visit", () => {
 
 function clearInitialPropsFromDOM(element: HTMLElement) {
   element.removeAttribute("data-props");
+}
+
+function handleDynamicImportFailure() {
+  const savedCount = localStorage.getItem("dynamic import failed count");
+  const count = savedCount ? parseInt(savedCount, 10) : 0;
+
+  if (count < 3 && count === 0) {
+    localStorage.setItem("dynamic import failed count", count + 1);
+    window.location.reload();
+  } else if (count < 3 && count > 0) {
+    localStorage.setItem("dynamic import failed count", count + 1);
+    setTimeout(() => window.location.reload(), 500);
+  } else {
+    localStorage.removeItem("dynamic import failed count");
+    alert("Failed to load page after 3 attempts try refreshing the page.");
+  }
 }
