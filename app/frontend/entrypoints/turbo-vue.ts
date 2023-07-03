@@ -5,8 +5,8 @@ let components: App[] = [];
 
 const mountApp = async (e: Event) => {
   const vueComponentsForPage = getVueComponents(window.location.pathname);
-  let app;
-  let nodeToMountOn;
+  let app: App;
+  let nodeToMountOn: HTMLElement;
   let props = {};
 
   if (vueComponentsForPage === undefined) {
@@ -23,6 +23,18 @@ const mountApp = async (e: Event) => {
           app = createApp(c, props ? JSON.parse(props) : undefined);
           components.push(app);
           app.mount(rootContainer);
+        })
+        .catch((error: Error) => {
+          if (
+            error instanceof TypeError &&
+            error.message.startsWith(
+              "Failed to fetch dynamically imported module:"
+            )
+          ) {
+            window.location.reload();
+          } else {
+            console.error(error);
+          }
         })
         .finally(() => {
           clearInitialPropsFromDOM(nodeToMountOn);
