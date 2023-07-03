@@ -25,6 +25,18 @@ const mountApp = async (e: Event) => {
           components.push(app);
           app.mount(rootContainer);
         })
+        .catch((error: Error) => {
+          if (
+            error instanceof TypeError &&
+            error.message.startsWith(
+              "Failed to fetch dynamically imported module:"
+            )
+          ) {
+            window.location.reload();
+          } else {
+            console.error(error);
+          }
+        })
         .finally(() => {
           clearInitialPropsFromDOM(nodeToMountOn);
         });
