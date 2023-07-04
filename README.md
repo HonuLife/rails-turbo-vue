@@ -42,7 +42,14 @@ rspec
 yarn test
 ```
 
-### Generate a view that uses a view component
+### Generate a new scaffold with and have the views styled with TailwindCSS
+
+```bash
+rails g scaffold
+# Ex. rails g scaffold animal name:string species:string age_years:integer
+```
+
+### Generate a view that will mount a Vue.js component
 
 ```bash
 rails generate view_with_vue index|show|edit|create ROUTE_PATH
