@@ -11,9 +11,6 @@
     </main>
 
     <footer>
-      <% if defined?(@typescript_entry_file) %>
-        <%= vite_typescript_tag "entrypoints/views/#{@typescript_entry_file}" %>
-      <% end %>
       <%= vite_typescript_tag "turbo-vue" %>
     </footer>
   </body>
