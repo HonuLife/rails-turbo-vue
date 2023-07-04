@@ -23,6 +23,7 @@ module RailsVue
     config.generators do |g|
       g.orm :active_record
       g.test_framework :rspec
+      g.template_engine :tailwindcss
     end
   end
 end
