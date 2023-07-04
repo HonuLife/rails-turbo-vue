@@ -6,15 +6,8 @@
     <%= render "shared/flash_notice" %>
     <%= render "shared/header" %>
 
-    <main class="px-4 lg:px-10">
+    <main class="px-4 lg:px-10 mt-10 max-w-screen-md mx-auto">
       <%= content_for?(:content) ? yield(:content) : yield %>
     </main>
-
-    <footer>
-      <% if defined?(@typescript_entry_file) %>
-        <%= vite_typescript_tag "entrypoints/views/#{@typescript_entry_file}" %>
-      <% end %>
-      <%= vite_typescript_tag "turbo-vue" %>
-    </footer>
   </body>
 </html>
