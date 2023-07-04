@@ -1,5 +1,6 @@
 {
   "name": "rails-vue",
+  "license": "MIT",
   "dependencies": {
     "@hotwired/turbo-rails": "^7.3.0",
     "vue": "^3.3.4"
@@ -15,9 +16,9 @@
     "@vue/test-utils": "^2.0.2",
     "@vue/tsconfig": "^0.3.2",
     "autoprefixer": "^10.4.14",
-    "eslint": "^8.40.0",
+    "eslint": "^8.44.0",
     "eslint-plugin-vue": "^9.0.0",
-    "jsdom": "^21.1.1",
+    "jsdom": "^22.1.0",
     "postcss": "^8.4.23",
     "prettier": "^2.5.1",
     "tailwindcss": "^3.3.2",
