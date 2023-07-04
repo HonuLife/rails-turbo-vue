@@ -1,0 +1,46 @@
+<%
+#% The license for this software can be found at hhttps://github.com/rails/tailwindcss-rails/blob/main/MIT-LICENSE which is reproduced here for your convenience:
+
+# Copyright (c) 2020 David Heinemeier Hansson
+
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of this software and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions:
+
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-%>
+<div id="<%%= dom_id <%= singular_name %> %>">
+<% attributes.reject(&:password_digest?).each do |attribute| -%>
+  <p class="my-5">
+    <strong class="block font-bold mb-1"><%= attribute.human_name %>:</strong>
+<% if attribute.attachment? -%>
+    <%%= link_to <%= singular_name %>.<%= attribute.column_name %>.filename, <%= singular_name %>.<%= attribute.column_name %> if <%= singular_name %>.<%= attribute.column_name %>.attached? %>
+<% elsif attribute.attachments? -%>
+    <%% <%= singular_name %>.<%= attribute.column_name %>.each do |<%= attribute.singular_name %>| %>
+      <div><%%= link_to <%= attribute.singular_name %>.filename, <%= attribute.singular_name %> %></div>
+    <%% end %>
+<% else -%>
+    <%%= <%= singular_name %>.<%= attribute.column_name %> %>
+<% end -%>
+  </p>
+
+<% end -%>
+  <%% if action_name != "show" %>
+    <%%= link_to "Show this <%= human_name.downcase %>", <%= singular_name %>, class: "text-purple-600 dark:text-purple-500 rounded-lg py-3 inline-block font-medium hover:text-purple-800 dark:hover:text-purple-400" %>
+    <%%= link_to 'Edit this <%= human_name.downcase %>', edit_<%= singular_name %>_path(<%= singular_name %>), class: "text-purple-600 dark:text-purple-500 rounded-lg py-3 ml-5 inline-block font-medium hover:text-purple-800 dark:hover:text-purple-400" %>
+    <hr class="mt-6">
+  <%% end %>
+</div>
