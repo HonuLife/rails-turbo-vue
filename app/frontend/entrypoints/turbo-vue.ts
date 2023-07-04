@@ -7,7 +7,7 @@ const mountApp = async (e: Event) => {
   const vueComponentsForPage = getVueComponents(window.location.pathname);
   let app: App;
   let nodeToMountOn: HTMLElement;
-  let props = {};
+  let props: string | undefined;
 
   if (vueComponentsForPage === undefined) {
     return;
@@ -28,7 +28,10 @@ const mountApp = async (e: Event) => {
         .catch((error: Error) => {
           if (
             error instanceof TypeError &&
-            error.message.includes("dynamically imported module")
+            // matches error in Chrome, Firefox, Edge and Opera
+            (error.message.includes("dynamically imported module") ||
+              // matches error in Safari
+              error.message.includes("Importing a module script failed"))
           ) {
             handleDynamicImportFailure();
           } else {
@@ -69,9 +72,10 @@ function handleDynamicImportFailure() {
     window.location.reload();
   } else if (count < 3 && count > 0) {
     localStorage.setItem("dynamic import failed count", count + 1);
-    setTimeout(() => window.location.reload(), 500);
   } else {
-    console.error(`Dynamic import failed 3 times on ${window.location.href}. Redirecting home.`);
+    console.error(
+      `Dynamic import failed 3 times on ${window.location.href}. Redirecting home.`
+    );
     localStorage.removeItem("dynamic import failed count");
 
     if (typeof Turbo !== "undefined") {
