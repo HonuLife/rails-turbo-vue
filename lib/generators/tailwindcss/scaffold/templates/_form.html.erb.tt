@@ -24,10 +24,10 @@
 -%>
 <%%= form_with(model: <%= model_resource_name %>, class: "contents") do |form| %>
   <%% if <%= singular_table_name %>.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%%= pluralize(<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</h2>
+    <div id="error_explanation" class="bg-red-700 px-2 py-4 mt-2 mx-auto font-sans font-medium text-white rounded-lg">
+      <h2 class="text-lg mb-2"><%%= pluralize(<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</h2>
 
-      <ul>
+      <ul class="list-disc list-inside ml-1">
         <%% <%= singular_table_name %>.errors.each do |error| %>
           <li><%%= error.full_message %></li>
         <%% end %>
@@ -44,24 +44,24 @@
 
 <div class="my-5">
     <%%= form.label :password_confirmation %>
-    <%%= form.password_field :password_confirmation, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%%= form.password_field :password_confirmation, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full dark:bg-gray-900 dark:border-gray-600" %>
 <% elsif attribute.attachments? -%>
     <%%= form.label :<%= attribute.column_name %> %>
-    <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, multiple: true, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, multiple: true, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full dark:bg-gray-900 dark:border-gray-600" %>
 <% else -%>
     <%%= form.label :<%= attribute.column_name %> %>
 <% if attribute.field_type == :text_area -%>
-    <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full dark:bg-gray-900 dark:border-gray-600" %>
 <% elsif attribute.field_type == :check_box -%>
     <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, class: "block mt-2 h-5 w-5" %>
 <% else -%>
-    <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full dark:bg-gray-900 dark:border-gray-600" %>
 <% end -%>
 <% end -%>
   </div>
 
 <% end -%>
   <div class="inline">
-    <%%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    <%%= form.submit class: "rounded-lg py-3 px-5 bg-green-600 hover:bg-green-800 dark:hover:bg-green-500 text-white inline-block font-medium" %>
   </div>
 <%% end %>
