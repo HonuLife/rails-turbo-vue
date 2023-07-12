@@ -68,10 +68,10 @@ function handleDynamicImportFailure() {
   const count = savedCount ? parseInt(savedCount, 10) : 0;
 
   if (count < 3 && count === 0) {
-    localStorage.setItem("dynamic import failed count", count + 1);
+    localStorage.setItem("dynamic import failed count", `${count + 1}`);
     window.location.reload();
   } else if (count < 3 && count > 0) {
-    localStorage.setItem("dynamic import failed count", count + 1);
+    localStorage.setItem("dynamic import failed count", `${count + 1}`);
   } else {
     console.error(
       `Dynamic import failed 3 times on ${window.location.href}. Redirecting home.`
