@@ -3,8 +3,7 @@ require 'spec_helper'
 RSpec.describe 'home page', type: :system do
   context 'when navigating from the home page to the pandas index page' do
     before do
-      page.goto('/')
-      page.wait_for_load_state
+      page.goto('/', waitUntil: "domcontentloaded")
     end
 
     it 'renders the pandas index page with the expected content' do
