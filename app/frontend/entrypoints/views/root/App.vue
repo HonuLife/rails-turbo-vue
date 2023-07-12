@@ -4,7 +4,7 @@ import TheWelcome from "@/components/TheWelcome.vue";
 </script>
 
 <template>
-  <header>
+  <header class="mb-12">
     <img
       alt="Vue logo"
       class="logo"

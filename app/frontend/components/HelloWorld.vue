@@ -1,5 +1,5 @@
 <template>
-  <div class="greetings">
+  <div>
     <h1 class="text-2xl font-bold text-center lg:text-left mb-2">
       Welcome to the Rails + Vue template app! ⚡️
     </h1>
