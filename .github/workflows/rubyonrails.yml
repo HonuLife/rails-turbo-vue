@@ -13,7 +13,7 @@ on:
 jobs:
   test-rspec:
     timeout-minutes: 30
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -54,8 +54,8 @@ jobs:
         id: playwright-cache
         with:
           path: |
-            ~/.cache/ms-playwright
-          key: "${{ runner.os }}-playwright-v4-${{env.PLAYWRIGHT_VERSION}}"
+            /Users/runner/Library/Caches/ms-playwright
+          key: "${{ runner.os }}-playwright-v5-${{env.PLAYWRIGHT_VERSION}}"
       - name: Install Playwright Browsers
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps chromium
