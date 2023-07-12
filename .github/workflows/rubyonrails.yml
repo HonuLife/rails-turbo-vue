@@ -13,22 +13,12 @@ on:
 jobs:
   test-rspec:
     timeout-minutes: 30
-    runs-on: ubuntu-latest
+    runs-on: macos-13
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      # Add or replace dependency steps here
-      - name: Install Ruby and gems
-        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - name: Setup SQLite environment
-        # You may pin to the exact commit or the version.
-        # uses: ccorsi/setup-sqlite@90c2ea365856628cdbb502d642b658d9d0fccfab
-        uses: ccorsi/setup-sqlite@v1.0.1
-        with:
-          # The version of SQLite that you want to install, example, 3.40.0
-          sqlite-version: 3.40.0
       - name: Set up database schema
         run: bin/rails db:schema:load
       - name: Cache yarn packages
