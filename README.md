@@ -6,13 +6,13 @@ A starter for working with [Rails 7](https://guides.rubyonrails.org/) + [Vue 3](
 
 ## Features
 
-- ✅ Render parts of views on the clientside with [Vue.js]([url](https://vuejs.org/)) if you want.
-- ✅ TypeScript support
+- ✅ Lazy loading of Vue components on pages where you want to use it
+- ✅ TypeScript (optional) support
 - ✅ [TailwindCSS](https://tailwindcss.com/)
 - ✅ [Vite](https://vitejs.dev/) for frontend assets via [Vite Ruby](https://vite-ruby.netlify.app/)
 - ✅ Navigation handled with [TurboDrive](https://turbo.hotwired.dev/handbook/drive)
 - ✅ System tests driven by [RSpec + Capybara + Playwright](https://playwright-ruby-client.vercel.app/docs/article/api_coverage)
-   - [`spec/system/pandas/index_spec.rb`](https://github.com/joekrump/rails-turbo-vue/blob/main/spec/system/pandas/index_spec.rb) can be a helpful example.
+   - [`spec/system/pandas/index_spec.rb`](https://github.com/joekrump/rails-turbo-vue/blob/main/spec/system/pandas/index_spec.rb) can be a helpful example
    - [Ruby Playwright - Page API](https://playwright-ruby-client.vercel.app/docs/api/page)
 - ✅ Custom generator for creating a view that loads a Vue component: `rails g view_with_vue index|show|edit|create ROUTE_PATH`. See [more details below](#generate-a-view-that-uses-a-view-component)
 - ✅ GitHub actions workflow for running Vitest and Rspec tests
