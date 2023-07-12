@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1 class="text-2xl font-bold text-center lg:text-left mb-2">
+    <h1
+      class="text-2xl font-bold text-center lg:text-left mb-2 tracking-tighter"
+    >
       Welcome to the Rails + Vue template app! ⚡️
     </h1>
     <h3 class="text-center lg:text-left">
