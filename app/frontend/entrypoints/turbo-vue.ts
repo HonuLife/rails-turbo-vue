@@ -13,34 +13,57 @@ const mountApp = async (e: Event) => {
     return;
   }
 
-  for (const [rootContainer, component] of vueComponentsForPage) {
+  const mountNewIntersectingVueComponents = (
+    entries: IntersectionObserverEntry[]
+  ) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const rootContainer = entry.target;
+        const component = vueComponentsForPage.find(
+          (c) => c[0] === `#${rootContainer.id}`
+        );
+
+        if (component !== undefined) {
+          component[1]()
+            .then((c: Component) => {
+              console.debug(c);
+              props = rootContainer.dataset.props;
+              app = createApp(c, props ? JSON.parse(props) : undefined);
+              components.push(app);
+              app.mount(rootContainer);
+              localStorage.removeItem("dynamic import failed count");
+            })
+            .catch((error: Error) => {
+              if (
+                error instanceof TypeError &&
+                // matches error in Chrome, Firefox, Edge and Opera
+                (error.message.includes("dynamically imported module") ||
+                  // matches error in Safari
+                  error.message.includes("Importing a module script failed"))
+              ) {
+                handleDynamicImportFailure();
+              } else {
+                console.error(error);
+              }
+            })
+            .finally(() => {
+              observer.unobserve(rootContainer);
+              clearInitialPropsFromDOM(rootContainer);
+            });
+        }
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(mountNewIntersectingVueComponents, {
+    threshold: 0.1,
+  });
+
+  for (const [rootContainer] of vueComponentsForPage) {
     nodeToMountOn = (e.currentTarget as Document)?.querySelector(rootContainer);
 
     if (nodeToMountOn !== null) {
-      component()
-        .then((c: Component) => {
-          props = nodeToMountOn.dataset.props;
-          app = createApp(c, props ? JSON.parse(props) : undefined);
-          components.push(app);
-          app.mount(rootContainer);
-          localStorage.removeItem("dynamic import failed count");
-        })
-        .catch((error: Error) => {
-          if (
-            error instanceof TypeError &&
-            // matches error in Chrome, Firefox, Edge and Opera
-            (error.message.includes("dynamically imported module") ||
-              // matches error in Safari
-              error.message.includes("Importing a module script failed"))
-          ) {
-            handleDynamicImportFailure();
-          } else {
-            console.error(error);
-          }
-        })
-        .finally(() => {
-          clearInitialPropsFromDOM(nodeToMountOn);
-        });
+      observer.observe(nodeToMountOn);
     } else {
       console.error("No container found for Vue component");
     }
