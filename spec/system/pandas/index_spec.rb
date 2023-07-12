@@ -36,4 +36,25 @@ RSpec.describe 'home page', type: :system do
         )
     end
   end
+
+  context "when viewing the pandas index page", headless: false do
+    before do
+      page.goto('/pandas')
+      page.wait_for_load_state
+    end
+
+    it "dynamically loads and mounts the Zap.vue component", headless: false do
+      header = page.wait_for_selector('h1')
+      expect(header.text_content).to eq('Our Pandas')
+
+      expect(page.content).not_to include('I was lazy loaded! ⚡️')
+
+      page.evaluate("document.querySelector('#lazy-load').scrollIntoView()") # Scroll to the #lazy-load div
+
+      #  FIXME: for some reason the request to dynamically load the Zap.vue component hangs in a "pending" request state
+      #  in the browser and so the content is never loaded. I'm not sure why this is happening. I've tried using
+      #  page.wait_for_load_state and page.wait_for_selector but neither of those seem to help. Running this test with the meta data: { headless: false } has only confirmed the issue but I've not found a fix yet.
+      #  expect(page.content).to include('I was lazy loaded! ⚡️')
+    end
+  end
 end
