@@ -63,6 +63,3 @@ rails generate view_with_vue index|show|edit|create ROUTE_PATH
 - Vue@3.3.4
 - rails@7.0.6.0
 - vite@4.3.3
-
-TODO:
-- [ ] SSR for vue files using this approach? https://www.railsjazz.com/blog/javascript-code-executed-inside-ruby-on-rails-app
