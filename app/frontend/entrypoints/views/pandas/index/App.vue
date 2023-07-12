@@ -8,16 +8,16 @@ defineProps({
 </script>
 
 <template>
-  <main>
+  <section class="mb-5">
     <h1 class="text-2xl mb-2">Our Pandas</h1>
 
-    <ul v-if="pandas.length > 0">
-      <li v-for="panda in pandas" :key="panda.name">
-        {{ panda.name }} is {{ panda.age }} years old
-      </li>
-    </ul>
-    <div v-else>
-      <p>No pandas found</p>
-    </div>
-  </main>
+    <article>
+      <ul v-if="pandas.length > 0">
+        <li v-for="panda in pandas" :key="panda.name">
+          {{ panda.name }} is {{ panda.age }} years old
+        </li>
+      </ul>
+      <p v-else class="mb-3">No pandas found</p>
+    </article>
+  </section>
 </template>

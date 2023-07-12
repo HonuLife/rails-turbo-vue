@@ -9,8 +9,7 @@ RSpec.describe 'home page', type: :system do
     expect(actual_screenshot_path)
       .to match_screenshot(
         expected_screenshot_path(suffix: nil),
-        max_threshold_pct: 1.4,
-        update: true
+        max_threshold_pct: 1.4
       )
   end
 end

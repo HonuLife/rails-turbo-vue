@@ -1,11 +1,16 @@
 const RootApp = async () =>
   (await import("@/entrypoints/views/root/App.vue")).default;
+const Zap = async () =>
+  (await import("@/entrypoints/views/pandas/index/Zap.vue")).default;
 const PandasApp = async () =>
   (await import("@/entrypoints/views/pandas/index/App.vue")).default;
 
 const routes = {
   "/": [["#root-view", RootApp]],
-  "/pandas": [["#pandas-view", PandasApp]],
+  "/pandas": [
+    ["#pandas-view", PandasApp],
+    ["#lazy-load", Zap],
+  ],
 };
 
 export const getVueComponents = (url: string) => {

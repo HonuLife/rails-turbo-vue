@@ -55,7 +55,7 @@ jobs:
         with:
           path: |
             ~/.cache/ms-playwright
-          key: "${{ runner.os }}-playwright-v4-${{env.PLAYWRIGHT_VERSION}}"
+          key: "${{ runner.os }}-playwright-v6-${{env.PLAYWRIGHT_VERSION}}"
       - name: Install Playwright Browsers
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps chromium
