@@ -51,3 +51,5 @@ gem 'sidekiq', '~> 6.4'
 gem 'vite_rails', '~> 3.0.10'
 
 gem 'nokogiri', '>= 1.13.6'
+
+gem "devise", "~> 4.9"
