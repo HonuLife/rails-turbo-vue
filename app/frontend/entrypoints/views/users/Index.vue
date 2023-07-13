@@ -3,13 +3,13 @@ import { onBeforeUnmount, onMounted, ref } from "vue";
 import { type Subscription } from "@rails/actioncable";
 import consumer from "@/channels/consumer.ts";
 
-let progress = ref(0);
+const progress = ref(null);
 let subscription: Subscription | null = null;
 
 const createImportChannelSubscription = () => {
   return consumer.subscriptions.create("ImportUsersProgressChannel", {
     connected() {
-      this.perform("get_progress");
+      console.log("connected");
     },
     disconnected() {
       console.log("disconnected");
@@ -22,14 +22,10 @@ const createImportChannelSubscription = () => {
 
 onMounted(() => {
   subscription = createImportChannelSubscription();
-  console.debug(subscription);
 });
 
 onBeforeUnmount(() => {
-  console.debug("onBeforeUnmount");
-  if (subscription) {
-    subscription.unsubscribe();
-  }
+  subscription?.unsubscribe();
 });
 </script>
 
@@ -37,6 +33,16 @@ onBeforeUnmount(() => {
   <main>
     <h1>users/index</h1>
 
-    <p>Progress: {{ progress }}%</p>
+    <section v-if="progress !== null">
+      <h2 class="text-xl">Import in progress</h2>
+      <div class="w-full bg-neutral-200 dark:bg-neutral-600">
+        <div
+          class="bg-blue-400 p-0.5 text-center text-xs font-bold leading-none text-primary-100"
+          :style="`width: ${progress}%`"
+        >
+          {{ progress }}%
+        </div>
+      </div>
+    </section>
   </main>
 </template>
