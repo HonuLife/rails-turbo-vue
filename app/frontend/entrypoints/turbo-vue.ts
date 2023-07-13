@@ -26,7 +26,6 @@ const mountApp = async (e: Event) => {
         if (component !== undefined) {
           component[1]()
             .then((c: Component) => {
-              console.debug(c);
               props = rootContainer.dataset.props;
               app = createApp(c, props ? JSON.parse(props) : undefined);
               components.push(app);

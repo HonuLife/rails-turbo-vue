@@ -1,2 +1,3 @@
 web: bin/rails server -p 3000
 vite: bundle exec bin/vite dev
+redis: redis-server

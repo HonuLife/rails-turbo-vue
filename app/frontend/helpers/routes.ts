@@ -5,7 +5,11 @@ const Zap = async () =>
 const PandasApp = async () =>
   (await import("@/entrypoints/views/pandas/index/App.vue")).default;
 
+const UsersIndex = async () =>
+  (await import("@/entrypoints/views/users/Index.vue")).default;
+
 const routes = {
+  "/users": [["#vue-root", UsersIndex]],
   "/": [["#root-view", RootApp]],
   "/pandas": [
     ["#pandas-view", PandasApp],
