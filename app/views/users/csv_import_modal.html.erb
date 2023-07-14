@@ -1,7 +1,7 @@
 <%= turbo_frame_tag "modal" do %>
-  <dialog class="w-full max-w-3xl bg-white rounded-md shadow p-0">
-    <header class="px-5 py-4 bg-white border border-t-0 border-x-0 border-gray-400 sticky top-0">
-      <h1 class="text-lg leading-8font-medium text-gray-600">Import Users</h1>
+  <dialog class="w-full max-w-3xl bg-white dark:bg-slate-900 rounded-md shadow p-0 dark:text-gray-200">
+    <header class="px-5 py-4 border border-t-0 border-x-0 border-gray-400 dark:border-gray-800 sticky top-0">
+      <h1 class="text-lg leading-8 font-medium">Import Users</h1>
     </header>
     <%= form_with url: import_from_csv_users_path, multipart: true, method: "post" do |form| %>
       <section class="px-5 py-10 mt-5 grid place-content-center">
@@ -14,10 +14,10 @@
         <div id="users_progress_bar"></div>
         <turbo-frame id="users_import_errors"></turbo-frame>
       </section>
-      <footer class="px-5 py-4 flex justify-between bg-white border border-gray-400 border-b-0 border-x-0 sticky bottom-0 ">
+      <footer class="px-5 py-4 flex justify-between border border-gray-400 dark:border-gray-800 border-b-0 border-x-0 sticky bottom-0 ">
         <button
           type="button"
-          class="bg-white hover:bg-gray-50 text-gray-800 font-medium py-1.5 px-3 border border-gray-300 shadow rounded"
+          class="bg-white hover:bg-gray-50 text-gray-800 dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-white font-medium py-1.5 px-3 border border-gray-300 dark:border-slate-800 shadow rounded"
           onclick="this.closest('dialog').close('close')"
         >
           Cancel
