@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-::backdrop {
+dialog::backdrop {
   backdrop-filter: blur(10px);
+  transition: backdrop-filter .5s ease;
 }
