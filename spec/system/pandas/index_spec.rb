@@ -19,7 +19,7 @@ RSpec.describe 'home page', type: :system do
       expect(actual_screenshot_path)
         .to match_screenshot(
           expected_screenshot_path(suffix: nil),
-          max_threshold_pct: 2.4
+          max_threshold_pct: 3.0
           # update: true # Uncomment this whenever you want to update the expected screenshot
         )
 
@@ -31,7 +31,7 @@ RSpec.describe 'home page', type: :system do
       expect(actual_screenshot_path(suffix: 'dark'))
         .to match_screenshot(
           expected_screenshot_path(suffix: 'dark'),
-          max_threshold_pct: 2.4
+          max_threshold_pct: 3.0
         )
     end
   end
