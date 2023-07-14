@@ -2,12 +2,12 @@
   <nav class="flex flex-wrap items-center justify-between px-3 py-3 bg-gray-100 lg:px-10 dark:bg-slate-900">
     <%= link_to "Rails + Vue", root_path, class: "text-2xl font-bold text-gray-900 dark:text-green-600 dark:hover:text-green-200" %>
 
-    <div class="flex gap-3">
+    <div class="flex gap-3 items-center">
       <%= link_to "Users", users_path, class: "text-xl font-bold text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-200" %>
       <%= link_to "Pandas", pandas_path, class: "text-xl font-bold text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-200" %>
 
       <% if current_user %>
-        <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "text-xl font-bold text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-200" %>
+        <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "text-sm font-bold text-primary hover:text-purple-600" %>
       <% else %>
         <%= link_to "Login", new_user_session_path, class: "text-xl font-bold hover:text-blue-300" %>
       <% end %>

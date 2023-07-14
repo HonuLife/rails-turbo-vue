@@ -3,6 +3,12 @@ import { createApp, type App, type Component } from "vue";
 
 let components: App[] = [];
 
+const onTurboLoad = async (e: Event) => {
+  await mountApp(e);
+
+  document.addEventListener("turbo:frame-render", openModal);
+};
+
 const mountApp = async (e: Event) => {
   const vueComponentsForPage = getVueComponents(window.location.pathname);
   let app: App;
@@ -69,7 +75,7 @@ const mountApp = async (e: Event) => {
   }
 };
 
-document.addEventListener("turbo:load", mountApp);
+document.addEventListener("turbo:load", onTurboLoad);
 
 document.addEventListener("turbo:visit", () => {
   if (components.length > 0) {
@@ -79,7 +85,15 @@ document.addEventListener("turbo:visit", () => {
 
     components = [];
   }
+
+  document.removeEventListener("turbo:frame-render", openModal);
 });
+
+const openModal = (e: Event) => {
+  if (typeof e.target === "object" && e.target instanceof Element) {
+    e.target.querySelector("dialog")?.showModal();
+  }
+};
 
 function clearInitialPropsFromDOM(element: HTMLElement) {
   element.removeAttribute("data-props");

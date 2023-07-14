@@ -18,4 +18,8 @@ class UsersController < ApplicationController
   def import_from_csv
     @import_result = ::Users::CsvUploadParser.new(params[:users_csv].read).import_users_from_csv
   end
+
+  def show
+    @user = User.find(params[:id])
+  end
 end
