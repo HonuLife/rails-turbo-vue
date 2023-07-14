@@ -3,7 +3,7 @@
     <header class="px-5 py-4 bg-white border border-t-0 border-x-0 border-gray-400 sticky top-0">
       <h1 class="text-lg leading-8font-medium text-gray-600">Import Users</h1>
     </header>
-    <%= form_with url: users_import_from_csv_path, multipart: true, method: "post" do |form| %>
+    <%= form_with url: import_from_csv_users_path, multipart: true, method: "post" do |form| %>
       <section class="px-5 py-10 mt-5 grid place-content-center">
         <turbo-frame id="users_import_notice"></turbo-frame>
         <div class="text-center">
