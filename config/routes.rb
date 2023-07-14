@@ -2,6 +2,8 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   get '/users', to: 'users#index'
+  get '/users/csv_import_modal', to: 'users#csv_import_modal'
+  post '/users/import_from_csv', to: 'users#import_from_csv'
 
   devise_for :users
   get '/pandas', to: 'pandas#index'

@@ -1,0 +1,13 @@
+<section id="users_progress_bar">
+  <div class="w-full bg-neutral-200 dark:bg-neutral-600 relative overflow-hidden rounded">
+    <div class="w-full text-center text-xs py-1 font-bold text-white leading-none absolute top-0">
+      <%= "#{processed_count}/#{total}" %> rows processed
+    </div>
+    <div
+      class="bg-purple-500 h-5"
+      style="width: <%= percentage_complete %>%"
+      role="progressbar" aria-valuenow="<%= processed_count %>" aria-valuemin="0" aria-valuemax="<%= total %>"
+    >
+    </div>
+  </div>
+</section>

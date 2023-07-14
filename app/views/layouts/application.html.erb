@@ -5,6 +5,8 @@
   <body class="font-sans font-normal leading-normal text-slate-800 dark:text-gray-50">
     <%= render "shared/header" %>
 
+    <turbo-frame id="modal"> </turbo-frame>
+
     <main class="px-4 lg:px-10 mt-10 max-w-screen-md mx-auto">
       <%= content_for?(:content) ? yield(:content) : yield %>
     </main>

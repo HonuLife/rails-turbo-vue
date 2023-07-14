@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss";
 
 export default {
   content: [
-    "./app/views/**/*.html.erb",
+    "./app/views/**/*.erb",
     "./app/frontend/**/*.vue",
     "./lib/**/*.html.erb.tt",
   ],

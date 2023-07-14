@@ -1,0 +1,31 @@
+<%= turbo_frame_tag "modal" do %>
+  <dialog class="w-full max-w-3xl bg-white rounded-md shadow p-0">
+    <header class="px-5 py-4 bg-white border border-t-0 border-x-0 border-gray-400 sticky top-0">
+      <h1 class="text-lg leading-8font-medium text-gray-600">Import Users</h1>
+    </header>
+    <%= form_with url: users_import_from_csv_path, multipart: true, method: "post" do |form| %>
+      <section class="px-5 py-10 mt-5 grid place-content-center">
+        <turbo-frame id="users_import_notice"></turbo-frame>
+        <div class="text-center">
+          <p class="my-2">Upload a CSV here to import users</p>
+          <%= file_field_tag :users_csv, accept: ".csv", class: "text-purple-500 hover:text-purple-600" %>
+        </div>
+        <%= turbo_stream_from 'users' %>
+        <div id="users_progress_bar"></div>
+        <turbo-frame id="users_import_errors"></turbo-frame>
+      </section>
+      <footer class="px-5 py-4 flex justify-between bg-white border border-gray-400 border-b-0 border-x-0 sticky bottom-0 ">
+        <button
+          type="button"
+          class="bg-white hover:bg-gray-50 text-gray-800 font-medium py-1.5 px-3 border border-gray-300 shadow rounded"
+          data-action="modal#close"
+        >
+          Cancel
+        </button>
+        <button type="submit" class=" bg-purple-500 hover:bg-purple-600 text-white py-1.5 px-3 font-medium whitespace-nowrap rounded">
+          Import Users
+        </button>
+      </footer>
+    <% end %>
+  </dialog>
+<% end %>
