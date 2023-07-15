@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 RSpec.describe 'home page', type: :system do
   it 'renders the home page with the expected content' do

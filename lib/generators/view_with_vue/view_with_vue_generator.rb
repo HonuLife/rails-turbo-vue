@@ -10,7 +10,7 @@ class ViewWithVueGenerator < Rails::Generators::NamedBase
     # Call the controller generator
 
     invoke('controller', [route_path])
-  rescue Thor::Error => e
+  rescue Thor::Error => _e
     # If the controller already exists, we don't need to do anything
   end
 
