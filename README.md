@@ -1,8 +1,8 @@
 [![CI](https://github.com/joekrump/rails-turbo-vue/actions/workflows/rubyonrails.yml/badge.svg)](https://github.com/joekrump/rails-turbo-vue/actions/workflows/rubyonrails.yml)
 
-# Rails + Vue
+# Rails + Turbo + Vue
 
-A starter for working with [Rails 7](https://guides.rubyonrails.org/) + [Vue 3](https://vuejs.org/).
+Render your views with Rails and then sprinkle in client-side rendered Vue components where you want them. Vue components are dynamically imported and mounted onto views where you want them.
 
 ## Features
 
@@ -16,6 +16,8 @@ A starter for working with [Rails 7](https://guides.rubyonrails.org/) + [Vue 3](
    - [Ruby Playwright - Page API](https://playwright-ruby-client.vercel.app/docs/api/page)
 - ✅ Custom generator for creating a view that loads a Vue component: `rails g view_with_vue index|show|edit|create ROUTE_PATH`. See [more details below](#generate-a-view-that-uses-a-view-component)
 - ✅ GitHub actions workflow for running Vitest and Rspec tests
+
+![Homepage](https://github.com/joekrump/rails-turbo-vue/blob/main/spec/expected_screenshots/expected_chromium_home_page_renders_the_home_page_with_the_expected_content_dark.png)
 
 ## Dev
 
