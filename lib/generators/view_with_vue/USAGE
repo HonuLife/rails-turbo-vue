@@ -6,7 +6,6 @@ Example:
 
     This will create:
         app/views/posts/show.html.erb
-        app/frontend/entrypoints/views/posts/show/App.vue
-        app/frontend/entrypoints/views/posts/show.ts
+        app/frontend/entrypoints/views/posts/Show.vue
         "/posts/:id, to: 'posts#show' in config/routes.rb"
         a 'show' method in app/controllers/posts_controller.rb

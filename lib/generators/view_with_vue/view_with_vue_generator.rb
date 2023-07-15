@@ -19,8 +19,6 @@ class ViewWithVueGenerator < Rails::Generators::NamedBase
     template 'view_with_vue.html.erb', "app/views/#{route_path}/#{name}.html.erb"
     say 'Creating the .vue file', '✅'
     template 'App.vue.erb', "app/frontend/entrypoints/views/#{route_path}/#{name.capitalize}.vue"
-    say 'Creating the .ts file that will mount the .vue component', '✅'
-    template 'view_with_vue.ts.erb', "app/frontend/entrypoints/views/#{route_path}/#{name}.ts"
   end
 
   def modify_file

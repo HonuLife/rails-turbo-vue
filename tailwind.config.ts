@@ -5,6 +5,7 @@ export default {
     "./app/views/**/*.html.erb",
     "./app/frontend/**/*.vue",
     "./lib/**/*.html.erb.tt",
+    "./lib/**/*.vue.erb",
   ],
   theme: {
     fontFamily: {
