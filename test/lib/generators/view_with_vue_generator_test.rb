@@ -43,9 +43,11 @@ class ViewWithVueGeneratorTest < Rails::Generators::TestCase
         </script>
 
         <template>
-          <main>
-            <h1>animals/pandas/index</h1>
-          </main>
+          <section>
+            <header>
+              <h1 class="text-3xl">animals/pandas/index</h1>
+            </header>
+          </section>
         </template>
       VUE
 
