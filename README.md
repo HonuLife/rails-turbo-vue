@@ -2,7 +2,7 @@
 
 # Rails + Turbo + Vue
 
-Render your views with Rails and then sprinkle in client-side rendered Vue components where you want them. When Vue components are used, they are dynamically imported and mounted when needed.
+Render your views with Rails and then sprinkle in client-side rendered Vue components where you want them. When Vue components are used, they are dynamically imported and mounted, keeping your app's load times fast for users by keeping js bundle sizes small.
 
 ## Features
 
