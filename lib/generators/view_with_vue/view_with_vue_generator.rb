@@ -18,7 +18,9 @@ class ViewWithVueGenerator < Rails::Generators::NamedBase
     say 'Creating .html.erb file', '✅'
     template 'view_with_vue.html.erb', "app/views/#{route_path}/#{name}.html.erb"
     say 'Creating the .vue file', '✅'
-    template 'App.vue.erb', "app/frontend/entrypoints/views/#{route_path}/#{name.capitalize}.vue"
+    template 'App.vue.erb', "app/frontend/entrypoints/views/#{route_path}/#{capitalize_name}.vue"
+    say 'Creating the .ts file for dynamically mounting the Vue component', '✅'
+    template 'mount-apps.ts.erb', "app/frontend/entrypoints/views/#{route_path}/mount-apps.ts"
   end
 
   def modify_file
@@ -41,11 +43,17 @@ class ViewWithVueGenerator < Rails::Generators::NamedBase
       snake_case_to_title_case("#{route_path.sub('/', '_')}_#{name}")
   end
 
+  def capitalize_name
+    return @capitalize_name if defined?(@capitalize_name)
+
+    @capitalize_name = name.split('_').map(&:capitalize).join('')
+  end
+
   def add_route_helper_entry
     route_helper_path = 'app/frontend/helpers/routes.ts'
     import_entry = <<~CODE
-      const #{vue_import_name} = async () =>
-        (await import("@/entrypoints/views/#{route_path}/#{name.capitalize}.vue")).default;
+      const mount#{capitalize_name} = async () =>
+        (await import("@/entrypoints/views/#{route_path}/mount-apps")).mount#{capitalize_name};
 
     CODE
 
@@ -53,11 +61,13 @@ class ViewWithVueGenerator < Rails::Generators::NamedBase
     route_path = result[1] if result
 
     route_entry = <<~CODE
-      \s\s"#{route_path}": [["#vue-root", #{vue_import_name}]],
+      \s\s"#{route_path}": {
+        \s\s"#vue-root": mount#{capitalize_name}
+      \s\s},
     CODE
 
-    insert_into_file route_helper_path, import_entry, before: /const routes = \{\n/
-    insert_into_file route_helper_path, route_entry, after: /const routes = \{\n/
+    insert_into_file route_helper_path, import_entry, before: /const routes: \{\n/
+    insert_into_file route_helper_path, route_entry, after: /\/\/ new route entry here\n/
   end
 
   def add_controller_method

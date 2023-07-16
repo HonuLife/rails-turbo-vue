@@ -4,7 +4,7 @@ const mountRootApp = async () =>
   (await import("@/entrypoints/views/root/mount-apps")).mountRootApp;
 const mountPandasZap = async () =>
   (await import("@/entrypoints/views/pandas/index/mount-apps")).mountZap;
-const mountPandasMain = async () =>
+const mountPandasInfo = async () =>
   (await import("@/entrypoints/views/pandas/index/mount-apps")).mountPandasInfo;
 
 const routes: {
@@ -15,8 +15,9 @@ const routes: {
   "/": {
     "#root-view": mountRootApp,
   },
+  // new route entry here
   "/pandas": {
-    "#pandas-view": mountPandasMain,
+    "#pandas-view": mountPandasInfo,
     "#lazy-load": mountPandasZap,
   },
 };

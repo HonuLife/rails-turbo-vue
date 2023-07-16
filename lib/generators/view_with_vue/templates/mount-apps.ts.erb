@@ -1,0 +1,17 @@
+import <%= capitalize_name %> from "@/entrypoints/views/<%= route_path %>/<%= capitalize_name %>.vue";
+import { mountComponent } from "@/helpers/mount-component";
+
+const mount<%= capitalize_name %> = () => {
+  // optional: add any components that this app depends on here. They will be
+  // globally available to this app.
+  //
+  // Example:
+  // const componentDependencies = {
+  //  WelcomeItem: () => import("@/components/WelcomeItem.vue"),
+  // };
+  // return mountComponent("#vue-root", <%= capitalize_name %>, componentDependencies);
+
+  return mountComponent("#vue-root", <%= capitalize_name %>);
+};
+
+export { mount<%= capitalize_name %> };
