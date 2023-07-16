@@ -1,9 +1,13 @@
 import { getVueComponents } from "@/helpers/routes";
-import { createApp, type App, type Component } from "vue";
+import { createApp, defineAsyncComponent, type App, type Component } from "vue";
 
-let components: App[] = [];
+let mountedApps: App[] = [];
 
-const mountApp = async (e: Event) => {
+const components = import.meta.glob<boolean, string, Component>(
+  "@/components/**/*.vue"
+);
+
+const mountVueComponents = async (e: Event) => {
   const vueComponentsForPage = getVueComponents(window.location.pathname);
   let app: App;
   let nodeToMountOn: HTMLElement;
@@ -18,7 +22,7 @@ const mountApp = async (e: Event) => {
   ) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        const rootContainer = entry.target;
+        const rootContainer = entry.target as HTMLElement;
         const component = vueComponentsForPage.find(
           (c) => c[0] === `#${rootContainer.id}`
         );
@@ -29,7 +33,8 @@ const mountApp = async (e: Event) => {
               console.debug(c);
               props = rootContainer.dataset.props;
               app = createApp(c, props ? JSON.parse(props) : undefined);
-              components.push(app);
+              registerComponents(app);
+              mountedApps.push(app);
               app.mount(rootContainer);
               localStorage.removeItem("dynamic import failed count");
             })
@@ -70,20 +75,45 @@ const mountApp = async (e: Event) => {
   }
 };
 
-document.addEventListener("turbo:load", mountApp);
+// Mount Vue components when Turbo has finished loading a view.
+// Find details about the turbo:load event here: https://turbo.hotwired.dev/reference/events
+document.addEventListener("turbo:load", mountVueComponents);
 
+// Unmount Vue components when there is a requested navigation to a new page.
+// Find details about the turbo:visit event here: https://turbo.hotwired.dev/reference/events
 document.addEventListener("turbo:visit", () => {
-  if (components.length > 0) {
-    components.forEach((app) => {
+  if (mountedApps.length > 0) {
+    mountedApps.forEach((app) => {
       app.unmount();
     });
 
-    components = [];
+    mountedApps = [];
   }
 });
 
 function clearInitialPropsFromDOM(element: HTMLElement) {
   element.removeAttribute("data-props");
+}
+
+function registerComponents(app: App) {
+  // INFO: I have concerns about this approach. It seems like it could lead to
+  //      slow performance since we have to loop over and register all Vue components.
+  //      as the number of Vue components used in the app grows, this could take quite a while.
+  //      since this is happening dynamically on every page load, it could lead to a poor user experience.
+  //      Also not every app requires all components to be available globally on it.
+  //      This is something that should be revisited in the future.
+  //      One alternative would be to have each app declare its dependencies, however, that
+  //      Feels like it would be a lot of work to maintain for developers.
+  // Make all components available globally on the app so that imports are not necessary
+  // in the script tag of components.
+  // https://vuejs.org/guide/components/registration.html#global-registration
+  // This avoids the need to handle dynamic imports in the script tag of components.
+  for (const [path, asyncComponentLoader] of Object.entries(components)) {
+    const componentName = path.split("/").pop()?.split(".")[0];
+    if (componentName !== undefined) {
+      app.component(componentName, defineAsyncComponent(asyncComponentLoader));
+    }
+  }
 }
 
 function handleDynamicImportFailure() {
