@@ -1,19 +1,29 @@
-const RootApp = async () =>
-  (await import("@/entrypoints/views/root/App.vue")).default;
-const Zap = async () =>
-  (await import("@/entrypoints/views/pandas/index/Zap.vue")).default;
-const PandasApp = async () =>
-  (await import("@/entrypoints/views/pandas/index/App.vue")).default;
+import type { AsyncAppMounter } from "@/helpers/mount-component.types";
 
-const routes = {
-  "/": [["#root-view", RootApp]],
-  "/pandas": [
-    ["#pandas-view", PandasApp],
-    ["#lazy-load", Zap],
-  ],
+const mountRootApp = async () =>
+  (await import("@/entrypoints/views/root/mount-apps")).mountRootApp;
+const mountPandasZap = async () =>
+  (await import("@/entrypoints/views/pandas/index/mount-apps")).mountZap;
+const mountPandasMain = async () =>
+  (await import("@/entrypoints/views/pandas/index/mount-apps")).mountPandasInfo;
+
+const routes: {
+  [routePath: string]: {
+    [elementIdSelector: string]: AsyncAppMounter;
+  };
+} = {
+  "/": {
+    "#root-view": mountRootApp,
+  },
+  "/pandas": {
+    "#pandas-view": mountPandasMain,
+    "#lazy-load": mountPandasZap,
+  },
 };
 
-export const getVueComponents = (url: string) => {
+export const getVueComponents = (
+  url: string
+): { [elementIdSelector: string]: AsyncAppMounter } => {
   const pattern = /^\/((?:[^\/]+\/)*[^\/]+)\/\d+(\/\w+)?$/;
   const result = url.match(pattern);
 

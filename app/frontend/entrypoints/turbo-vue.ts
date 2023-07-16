@@ -1,19 +1,13 @@
 import { getVueComponents } from "@/helpers/routes";
-import { createApp, defineAsyncComponent, type App, type Component } from "vue";
+import type { App } from "vue";
 
-let mountedApps: App[] = [];
-
-const components = import.meta.glob<boolean, string, Component>(
-  "@/components/**/*.vue"
-);
+let mountedApps: Array<App | undefined> = [];
 
 const mountVueComponents = async (e: Event) => {
-  const vueComponentsForPage = getVueComponents(window.location.pathname);
-  let app: App;
+  const vueAppsForPage = getVueComponents(window.location.pathname);
   let nodeToMountOn: HTMLElement;
-  let props: string | undefined;
 
-  if (vueComponentsForPage === undefined) {
+  if (vueAppsForPage === undefined) {
     return;
   }
 
@@ -23,20 +17,12 @@ const mountVueComponents = async (e: Event) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const rootContainer = entry.target as HTMLElement;
-        const component = vueComponentsForPage.find(
-          (c) => c[0] === `#${rootContainer.id}`
-        );
+        const asyncAppLoader = vueAppsForPage[`#${rootContainer.id}`];
 
-        if (component !== undefined) {
-          component[1]()
-            .then((c: Component) => {
-              console.debug(c);
-              props = rootContainer.dataset.props;
-              app = createApp(c, props ? JSON.parse(props) : undefined);
-              registerComponents(app);
-              mountedApps.push(app);
-              app.mount(rootContainer);
-              localStorage.removeItem("dynamic import failed count");
+        if (asyncAppLoader !== undefined) {
+          asyncAppLoader()
+            .then((mountApp) => {
+              mountedApps.push(mountApp());
             })
             .catch((error: Error) => {
               if (
@@ -64,8 +50,10 @@ const mountVueComponents = async (e: Event) => {
     threshold: 0.1,
   });
 
-  for (const [rootContainer] of vueComponentsForPage) {
-    nodeToMountOn = (e.currentTarget as Document)?.querySelector(rootContainer);
+  for (const elementIdSelector in vueAppsForPage) {
+    nodeToMountOn = (e.currentTarget as Document)?.querySelector(
+      elementIdSelector
+    ) as HTMLElement;
 
     if (nodeToMountOn !== null) {
       observer.observe(nodeToMountOn);
@@ -84,7 +72,7 @@ document.addEventListener("turbo:load", mountVueComponents);
 document.addEventListener("turbo:visit", () => {
   if (mountedApps.length > 0) {
     mountedApps.forEach((app) => {
-      app.unmount();
+      app?.unmount();
     });
 
     mountedApps = [];
@@ -93,27 +81,6 @@ document.addEventListener("turbo:visit", () => {
 
 function clearInitialPropsFromDOM(element: HTMLElement) {
   element.removeAttribute("data-props");
-}
-
-function registerComponents(app: App) {
-  // INFO: I have concerns about this approach. It seems like it could lead to
-  //      slow performance since we have to loop over and register all Vue components.
-  //      as the number of Vue components used in the app grows, this could take quite a while.
-  //      since this is happening dynamically on every page load, it could lead to a poor user experience.
-  //      Also not every app requires all components to be available globally on it.
-  //      This is something that should be revisited in the future.
-  //      One alternative would be to have each app declare its dependencies, however, that
-  //      Feels like it would be a lot of work to maintain for developers.
-  // Make all components available globally on the app so that imports are not necessary
-  // in the script tag of components.
-  // https://vuejs.org/guide/components/registration.html#global-registration
-  // This avoids the need to handle dynamic imports in the script tag of components.
-  for (const [path, asyncComponentLoader] of Object.entries(components)) {
-    const componentName = path.split("/").pop()?.split(".")[0];
-    if (componentName !== undefined) {
-      app.component(componentName, defineAsyncComponent(asyncComponentLoader));
-    }
-  }
 }
 
 function handleDynamicImportFailure() {
