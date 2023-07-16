@@ -59,9 +59,12 @@ class ViewWithVueGeneratorTest < Rails::Generators::TestCase
       assert_file(
         "#{generator_output_path}/app/frontend/helpers/routes.ts"
       ) do |content|
-        assert_match 'const AnimalsPandasIndex = async () =>', content
-        assert_match '  (await import("@/entrypoints/views/animals/pandas/Index.vue")).default;', content
-        assert_match '  "/animals/pandas": [["#vue-root", AnimalsPandasIndex]],', content
+        assert_match 'const mountIndex = async () =>', content
+        assert_match '  (await import("@/entrypoints/views/animals/pandas/mount-apps")).mountIndex;', content
+
+        assert_match '"/animals/pandas": {', content
+        assert_match '"#vue-root": mountIndex', content
+        assert_match '}', content
       end
     end
   end

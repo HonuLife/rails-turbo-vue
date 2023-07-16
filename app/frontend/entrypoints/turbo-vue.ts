@@ -1,15 +1,13 @@
 import { getVueComponents } from "@/helpers/routes";
-import { createApp, type App, type Component } from "vue";
+import type { App } from "vue";
 
-let components: App[] = [];
+let mountedApps: Array<App | undefined> = [];
 
-const mountApp = async (e: Event) => {
-  const vueComponentsForPage = getVueComponents(window.location.pathname);
-  let app: App;
+const mountVueComponents = async (e: Event) => {
+  const vueAppsForPage = getVueComponents(window.location.pathname);
   let nodeToMountOn: HTMLElement;
-  let props: string | undefined;
 
-  if (vueComponentsForPage === undefined) {
+  if (vueAppsForPage === undefined) {
     return;
   }
 
@@ -18,20 +16,13 @@ const mountApp = async (e: Event) => {
   ) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        const rootContainer = entry.target;
-        const component = vueComponentsForPage.find(
-          (c) => c[0] === `#${rootContainer.id}`
-        );
+        const rootContainer = entry.target as HTMLElement;
+        const asyncAppLoader = vueAppsForPage[`#${rootContainer.id}`];
 
-        if (component !== undefined) {
-          component[1]()
-            .then((c: Component) => {
-              console.debug(c);
-              props = rootContainer.dataset.props;
-              app = createApp(c, props ? JSON.parse(props) : undefined);
-              components.push(app);
-              app.mount(rootContainer);
-              localStorage.removeItem("dynamic import failed count");
+        if (asyncAppLoader !== undefined) {
+          asyncAppLoader()
+            .then((mountApp) => {
+              mountedApps.push(mountApp());
             })
             .catch((error: Error) => {
               if (
@@ -59,8 +50,10 @@ const mountApp = async (e: Event) => {
     threshold: 0.1,
   });
 
-  for (const [rootContainer] of vueComponentsForPage) {
-    nodeToMountOn = (e.currentTarget as Document)?.querySelector(rootContainer);
+  for (const elementIdSelector in vueAppsForPage) {
+    nodeToMountOn = (e.currentTarget as Document)?.querySelector(
+      elementIdSelector
+    ) as HTMLElement;
 
     if (nodeToMountOn !== null) {
       observer.observe(nodeToMountOn);
@@ -70,15 +63,19 @@ const mountApp = async (e: Event) => {
   }
 };
 
-document.addEventListener("turbo:load", mountApp);
+// Mount Vue components when Turbo has finished loading a view.
+// Find details about the turbo:load event here: https://turbo.hotwired.dev/reference/events
+document.addEventListener("turbo:load", mountVueComponents);
 
+// Unmount Vue components when there is a requested navigation to a new page.
+// Find details about the turbo:visit event here: https://turbo.hotwired.dev/reference/events
 document.addEventListener("turbo:visit", () => {
-  if (components.length > 0) {
-    components.forEach((app) => {
-      app.unmount();
+  if (mountedApps.length > 0) {
+    mountedApps.forEach((app) => {
+      app?.unmount();
     });
 
-    components = [];
+    mountedApps = [];
   }
 });
 
