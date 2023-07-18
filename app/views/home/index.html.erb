@@ -1,7 +1,7 @@
 <div class="max-w-screen-sm mx-auto">
   <div id="root-view" data-props='{"options":[1,2,3]}'>
     <ul v-cloak>
-      <li v-for="option in options">{{ option }}</li>
+      <li v-for="option in options" @click="onClick">{{ option }}</li>
     </ul>
   </div>
 </div>

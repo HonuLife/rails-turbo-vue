@@ -1,5 +1,12 @@
-import type { AsyncComponentLoader, Component, App, CreateAppFunction } from "vue";
+import type {
+  AsyncComponentLoader,
+  Component,
+  App,
+  CreateAppFunction,
+} from "vue";
 import { createApp, defineAsyncComponent } from "vue/dist/vue.esm-bundler";
+
+
 
 export function mountComponent(
   querySelector: string,
@@ -16,6 +23,11 @@ export function mountComponent(
       data: () => {
         return props ? JSON.parse(props) : undefined;
       },
+      methods: {
+        onClick: () => {
+          console.log("clicked");
+        }
+      }
     });
 
     if (componentDependencies !== undefined) {
