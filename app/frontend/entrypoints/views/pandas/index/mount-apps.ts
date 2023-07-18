@@ -5,8 +5,7 @@ const mountPandasInfo = () => mountComponent("#pandas-view", PandasInfo);
 const mountZap = () =>
   mountComponent(
     "#lazy-load",
-    async () =>
-      (await import("@/entrypoints/views/pandas/index/Zap.vue")).default
+    () => import("@/entrypoints/views/pandas/index/Zap.vue")
   );
 
 export { mountPandasInfo, mountZap };

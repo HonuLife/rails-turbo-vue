@@ -1,5 +1,6 @@
 import {
   createApp,
+  defineAsyncComponent,
   type App,
   type AsyncComponentLoader,
   type Component,
@@ -18,7 +19,7 @@ export async function mountComponent(
     if (typeof component === "function") {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore - this is an AsyncComponentLoader, not a Component in this case
-      component = await component();
+      component = defineAsyncComponent(component);
     }
 
     app = createApp(component, props ? JSON.parse(props) : undefined);
