@@ -1,5 +1,5 @@
-import type { AsyncComponentLoader, Component } from "vue";
-import { createApp, type App, defineAsyncComponent } from "vue";
+import type { AsyncComponentLoader, Component, App, CreateAppFunction } from "vue";
+import { createApp, defineAsyncComponent } from "vue/dist/vue.esm-bundler";
 
 export function mountComponent(
   querySelector: string,
@@ -11,7 +11,12 @@ export function mountComponent(
 
   if (rootContainer !== null) {
     const props = rootContainer.dataset.props;
-    app = createApp(component, props ? JSON.parse(props) : undefined);
+
+    app = (createApp as CreateAppFunction<HTMLElement>)({
+      data: () => {
+        return props ? JSON.parse(props) : undefined;
+      },
+    });
 
     if (componentDependencies !== undefined) {
       globallyRegisterComponentsOnApp(app, componentDependencies);
