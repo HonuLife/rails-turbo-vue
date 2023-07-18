@@ -1,3 +1,11 @@
+<script lang="ts" setup>
+import WelcomeItem from "@/components/WelcomeItem.vue";
+import IconDocumentation from "@/components/icons/IconDocumentation.vue";
+import IconTooling from "@/components/icons/IconTooling.vue";
+import IconEcosystem from "@/components/icons/IconEcosystem.vue";
+import IconCommunity from "@/components/icons/IconCommunity.vue";
+</script>
+
 <template>
   <WelcomeItem>
     <template #icon>

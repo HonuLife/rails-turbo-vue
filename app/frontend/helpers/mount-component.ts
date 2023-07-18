@@ -1,21 +1,28 @@
-import type { AsyncComponentLoader, Component } from "vue";
-import { createApp, type App, defineAsyncComponent } from "vue";
+import {
+  createApp,
+  defineAsyncComponent,
+  type App,
+  type AsyncComponentLoader,
+  type Component,
+} from "vue";
 
-export function mountComponent(
+export async function mountComponent(
   querySelector: string,
-  component: Component,
-  componentDependencies?: Record<string, AsyncComponentLoader<Component>>
+  component: AsyncComponentLoader | Component
 ) {
   const rootContainer = document.querySelector(querySelector) as HTMLElement;
   let app: App | undefined;
 
   if (rootContainer !== null) {
     const props = rootContainer.dataset.props;
-    app = createApp(component, props ? JSON.parse(props) : undefined);
 
-    if (componentDependencies !== undefined) {
-      globallyRegisterComponentsOnApp(app, componentDependencies);
+    if (typeof component === "function") {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore - this is an AsyncComponentLoader, not a Component in this case
+      component = defineAsyncComponent(component);
     }
+
+    app = createApp(component, props ? JSON.parse(props) : undefined);
 
     app.mount(rootContainer);
     localStorage.removeItem("dynamic import failed count");
@@ -24,13 +31,4 @@ export function mountComponent(
   }
 
   return app;
-}
-
-function globallyRegisterComponentsOnApp(
-  app: App,
-  components: Record<string, AsyncComponentLoader<Component>>
-) {
-  for (const [name, asyncComponentLoader] of Object.entries(components)) {
-    app.component(name, defineAsyncComponent(asyncComponentLoader));
-  }
 }
