@@ -21,8 +21,8 @@ const mountVueComponents = async (e: Event) => {
 
         if (asyncAppLoader !== undefined) {
           asyncAppLoader()
-            .then((mountApp) => {
-              mountedApps.push(mountApp());
+            .then(async (mountApp) => {
+              mountedApps.push(await mountApp());
             })
             .catch((error: Error) => {
               if (

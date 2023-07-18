@@ -1,5 +1,5 @@
 import type { App } from "vue";
 
-type AsyncAppMounter = () => Promise<() => App | undefined>;
+type AsyncAppMounter = () => Promise<() => Promise<App | undefined>>;
 
-export type { AsyncAppMounter }
+export type { AsyncAppMounter };
