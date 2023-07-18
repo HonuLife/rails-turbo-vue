@@ -6,8 +6,6 @@ import type {
 } from "vue";
 import { createApp, defineAsyncComponent } from "vue/dist/vue.esm-bundler";
 
-
-
 export function mountComponent(
   querySelector: string,
   component: Component,
@@ -17,25 +15,32 @@ export function mountComponent(
   let app: App | undefined;
 
   if (rootContainer !== null) {
-    const props = rootContainer.dataset.props;
+    const script = rootContainer.querySelector("script");
+    const template = rootContainer.querySelector("template");
 
-    app = (createApp as CreateAppFunction<HTMLElement>)({
-      data: () => {
-        return props ? JSON.parse(props) : undefined;
-      },
-      methods: {
-        onClick: () => {
-          console.log("clicked");
-        }
-      }
-    });
+    let options = null;
 
-    if (componentDependencies !== undefined) {
-      globallyRegisterComponentsOnApp(app, componentDependencies);
+    if (script !== null && script.textContent !== null) {
+      options = eval(`(${script?.innerText})()`);
     }
 
-    app.mount(rootContainer);
-    localStorage.removeItem("dynamic import failed count");
+    if (template !== null && template.innerHTML !== null) {
+      app = (createApp as CreateAppFunction<HTMLElement>)({
+        template: rootContainer.querySelector("template")?.innerHTML,
+        ...options,
+      });
+
+      if (options !== null) {
+        script?.remove();
+      }
+
+      if (componentDependencies !== undefined) {
+        globallyRegisterComponentsOnApp(app, componentDependencies);
+      }
+
+      app.mount(rootContainer);
+      localStorage.removeItem("dynamic import failed count");
+    }
   } else {
     console.error("No container found for Vue component: ", querySelector);
   }

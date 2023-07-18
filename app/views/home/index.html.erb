@@ -1,7 +1,33 @@
 <div class="max-w-screen-sm mx-auto">
-  <div id="root-view" data-props='{"options":[1,2,3]}'>
-    <ul v-cloak>
-      <li v-for="option in options" @click="onClick">{{ option }}</li>
-    </ul>
+  <div id="root-view">
+    <template>
+      <div v-cloak>
+        {{ count }}
+        {{ countDouble }}
+        <button @click="onClick">Increase Count</button>
+      </div>
+    </template>
+
+    <script setup>
+      function options() {
+        return {
+          data: () => {
+            return {
+              count: 0,
+            };
+          },
+          methods: {
+            onClick() {
+              this.count++;
+            },
+          },
+          computed: {
+            countDouble() {
+              return this.count * 2;
+            },
+          }
+        };
+      }
+    </script>
   </div>
 </div>
