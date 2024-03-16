@@ -59,7 +59,8 @@ node_modules
 *.local
 .DS_Store
 
-.yarn/
+.yarn/cache/*
+.yarn/install-state.gz
 .vscode/
 dump.rdb
 
