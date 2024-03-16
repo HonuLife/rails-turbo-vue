@@ -65,4 +65,4 @@ rails generate view_with_vue index|show|edit|create ROUTE_PATH
 - ruby@3.3.0
 - Vue@3.3.4
 - rails@7.0.6.0
-- vite@4.3.3
+- vite@5.1.6
