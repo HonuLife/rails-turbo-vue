@@ -1,5 +1,5 @@
 {
-  "name": "rails-vue",
+  "name": "rails-turbo-vue",
   "license": "MIT",
   "dependencies": {
     "@hotwired/turbo-rails": "^7.3.0",
@@ -24,9 +24,9 @@
     "rollup-plugin-visualizer": "^5.9.2",
     "tailwindcss": "^3.3.2",
     "typescript": "^5.0.4",
-    "vite": "^4.3.9",
+    "vite": "^5.0.0",
     "vite-plugin-full-reload": "^1.0.5",
-    "vite-plugin-ruby": "^3.2.0",
+    "vite-plugin-ruby": "^5.0.0",
     "vitest": "^0.32.4"
   },
   "scripts": {
@@ -38,5 +38,6 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
-  }
+  },
+  "packageManager": "yarn@3.6.4"
 }
