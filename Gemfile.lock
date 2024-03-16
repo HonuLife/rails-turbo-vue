@@ -130,12 +130,12 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
-    nokogiri (1.15.2)
+    nokogiri (1.16.3)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    nokogiri (1.15.2-arm64-darwin)
+    nokogiri (1.16.3-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.15.2-x86_64-darwin)
+    nokogiri (1.16.3-x86_64-darwin)
       racc (~> 1.4)
     playwright-ruby-client (1.35.0)
       concurrent-ruby (>= 1.1.6)
@@ -211,10 +211,10 @@ GEM
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
       spring (>= 1.2, < 3.0)
-    sqlite3 (1.6.2)
+    sqlite3 (1.7.3)
       mini_portile2 (~> 2.8.0)
-    sqlite3 (1.6.2-arm64-darwin)
-    sqlite3 (1.6.2-x86_64-darwin)
+    sqlite3 (1.7.3-arm64-darwin)
+    sqlite3 (1.7.3-x86_64-darwin)
     thor (1.2.2)
     timeout (0.4.0)
     turbo-rails (1.4.0)
@@ -264,7 +264,7 @@ DEPENDENCIES
   vite_rails (~> 3.0.10)
 
 RUBY VERSION
-   ruby 3.0.5p211
+   ruby 3.3.0p0
 
 BUNDLED WITH
    2.4.12
