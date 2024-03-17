@@ -48,6 +48,8 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'name_of_person', '~> 1.1', '>= 1.1.1'
 gem 'sidekiq', '~> 7.1'
-gem 'vite_rails', '~> 3.0.10'
+
+gem 'open3'
+gem 'vite_rails', '~> 3.0.17'
 
 gem 'nokogiri', '>= 1.13.6'

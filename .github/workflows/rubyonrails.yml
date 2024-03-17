@@ -7,9 +7,9 @@
 name: "Ruby on Rails CI"
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 jobs:
   test-rspec:
     timeout-minutes: 30
@@ -35,10 +35,10 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Get installed Playwright version
         run: |
-           YARN_JSON="$(yarn info @playwright/test dist --json)"
-           PLAYWRIGHT_SHA=$(node -e "console.log(JSON.parse('$YARN_JSON').data.shasum)")
-           echo "PLAYWRIGHT_VERSION=$PLAYWRIGHT_SHA" >> $GITHUB_ENV
-           echo "Playwright VERSION SHA: $PLAYWRIGHT_SHA"
+          YARN_JSON="$(yarn info @playwright/test dist --json)"
+          PLAYWRIGHT_VERSION=$(node -e "console.log(JSON.parse('$YARN_JSON').value)")
+          echo "PLAYWRIGHT_VERSION=$PLAYWRIGHT_VERSION" >> $GITHUB_ENV
+          echo "Playwright VERSION: $PLAYWRIGHT_VERSION"
       - name: Cache playwright binaries
         uses: actions/cache@v3
         id: playwright-cache
